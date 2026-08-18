@@ -62,6 +62,12 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
   metade de baixo caindo pro escuro — é onde o texto do card entra. Ao trocar
   qualquer uma, manter o nome do arquivo e a mesma receita: vertical 4:5,
   assunto na metade de cima, metade de baixo sem elemento importante.
+- **Fotos do evento (dobra 4)**: `evento-sala`, `evento-mentor` e
+  `evento-turma` formam a faixa de abertura (1000×666); `evento-reflexao`,
+  `evento-microfone`, `evento-palco` e `evento-abraco` entram dentro das
+  etapas (1200×800, exibidas em recorte 2:1 pelo CSS). São da edição
+  anterior da imersão. Ao trocar, manter os nomes e conferir o
+  `object-position` da etapa correspondente pra não cortar rosto.
 - **Foto da hero**: o original `background-hero.png` (2,5 MB) fica no repositório
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a

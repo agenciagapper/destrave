@@ -905,7 +905,258 @@ button { font: inherit; color: inherit; }
   }
 }
 
-/* ---------- 13. Placeholder das próximas dobras ---------- */
+/* ---------- 13. Dobra 4: o método na ordem em que acontece ----------
+   Volta ao escuro depois do bloco claro. As fotos são da edição
+   anterior e é o material real que carrega o peso visual aqui: um fio
+   liga as sete etapas e o texto fica solto, sem caixa em volta.
+   -------------------------------------------------------------------- */
+.metodo {
+  padding-inline: var(--gutter);
+  padding-block: 0 clamp(3.5rem, 9vw, 7rem);
+  background: var(--ink);
+}
+
+/* Faixa de abertura, sangrando de ponta a ponta */
+.metodo__strip {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.metodo__strip img {
+  width: 100%;
+  height: clamp(10rem, 26vw, 17rem);
+  object-fit: cover;
+}
+
+/* No celular a faixa mostra duas fotos: com três, cada uma ficaria
+   estreita demais pra se ler o que está acontecendo na sala. */
+.metodo__strip-3 { display: none; }
+
+/* A base da faixa dissolve no fundo em vez de cortar reto */
+.metodo__strip::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent 0%, var(--ink) 92%);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .metodo__strip { grid-template-columns: repeat(3, 1fr); }
+  .metodo__strip-3 { display: block; }
+}
+
+.metodo__intro {
+  max-width: 34rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+  text-align: center;
+}
+
+.metodo__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--flame);
+}
+
+.metodo__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.metodo__title-em {
+  display: block;
+  font-family: var(--font-emphasis);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.01em;
+  color: var(--flame);
+}
+
+.metodo__lead {
+  max-width: 52ch;
+  margin: clamp(0.85rem, 2vw, 1.15rem) auto 0;
+  color: var(--bone-dim);
+  font-size: var(--fs-sub);
+  text-wrap: pretty;
+}
+
+/* ----- O fio e as sete estações ----- */
+.etapas {
+  width: 100%;
+  max-width: var(--measure);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.etapa {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  column-gap: clamp(0.75rem, 2.2vw, 1.35rem);
+  padding-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+/* O fio: nasce no número e desce até a etapa seguinte.
+   A última etapa não tem fio — é onde a sequência termina. */
+.etapa::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0;
+  left: calc(1.375rem - 1px);
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--flame) 0%,
+    var(--wine-lift) 26%,
+    var(--wine-lift) 100%);
+}
+.etapa:last-child::before { display: none; }
+
+/* O número é a estação: fundo cheio pra abrir um vão no fio */
+.etapa__num {
+  position: relative;
+  z-index: 1;
+  padding-block: 0.15rem 0.45rem;
+  background: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--bone-dim);
+  text-align: center;
+}
+
+.etapa--destaque .etapa__num { color: var(--flame); }
+
+.etapa__tag {
+  margin-bottom: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+.etapa__title {
+  font-size: clamp(1.0625rem, 1rem + 0.5vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.etapa__text {
+  margin-top: 0.55rem;
+  max-width: 64ch;
+  color: var(--bone-dim);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.etapa__text strong {
+  font-weight: 600;
+  color: var(--bone);
+}
+
+/* Corte largo, de cinema: a foto entra como faixa e não como bloco 3:2,
+   que empurraria a etapa seguinte pra muito longe. O object-position é
+   ajustado por foto pra não cortar cabeça nem o gesto. */
+.etapa__foto {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  height: auto;
+  margin-top: clamp(1rem, 2.5vw, 1.4rem);
+  object-fit: cover;
+  object-position: center 45%;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--bone) 9%, transparent);
+}
+
+.etapa__foto--palco { object-position: center 20%; }
+.etapa__foto--abraco { object-position: center 38%; }
+
+/* Etapa 02: os três pilares, separados por fio e não por caixa */
+.tripe {
+  display: grid;
+  gap: clamp(0.85rem, 2vw, 1.5rem);
+  margin: clamp(1rem, 2.5vw, 1.4rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tripe__item {
+  padding-top: 0.7rem;
+  border-top: 1px solid color-mix(in srgb, var(--wine-lift) 70%, transparent);
+}
+
+.tripe__nome {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tripe__texto {
+  margin-top: 0.3rem;
+  color: var(--bone-dim);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+/* Etapa 03: as três rodadas, uma linha só */
+.rodadas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-top: clamp(1rem, 2.5vw, 1.35rem);
+}
+
+.rodadas__n {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--flame);
+}
+
+.rodadas__seta {
+  color: color-mix(in srgb, var(--bone-dim) 70%, transparent);
+  font-size: 1rem;
+}
+
+.rodadas__un {
+  margin-left: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--bone-dim);
+}
+
+@media (min-width: 720px) {
+  .etapa {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    column-gap: clamp(1rem, 3vw, 2rem);
+  }
+  .etapa::before { left: calc(1.75rem - 1px); }
+  .tripe { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- 14. Placeholder das próximas dobras ---------- */
 .placeholder-section {
   padding-block: var(--space-6);
   background: var(--ink);
