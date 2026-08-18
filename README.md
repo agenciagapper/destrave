@@ -56,10 +56,12 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
 - **Fontes** ficam em `assets/fonts/` e são carregadas por `@font-face` local,
   sem chamada ao Google Fonts: Archivo (títulos e corpo), Instrument Serif
   itálica (linha de ênfase) e IBM Plex Mono (dígitos do contador).
-- **Cards da dobra 2**: `trava-1.webp`, `trava-2.webp` e `trava-3.webp` são
-  imagens provisórias geradas só para fechar o layout. Substituir pelos arquivos
-  definitivos mantendo os mesmos nomes, em formato vertical (proporção 4:5),
-  com a metade de baixo sem elementos importantes: é onde o texto entra.
+- **Cards da dobra 2**: `trava-1.webp` (o branco na hora H), `trava-2.webp`
+  (perde o fio da apresentação) e `trava-3.webp` (desiste de gravar) são fotos
+  geradas no Magnific, 800×1000 (4:5), tratadas no vinho da paleta e com a
+  metade de baixo caindo pro escuro — é onde o texto do card entra. Ao trocar
+  qualquer uma, manter o nome do arquivo e a mesma receita: vertical 4:5,
+  assunto na metade de cima, metade de baixo sem elemento importante.
 - **Foto da hero**: o original `background-hero.png` (2,5 MB) fica no repositório
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a

@@ -627,6 +627,8 @@ button { font: inherit; color: inherit; }
   /* Altura calibrada para o texto ocupar cerca de metade do card */
   min-height: 38rem;
   border-radius: 20px;
+  /* Contorno que segura a silhueta do card: a foto some no fundo escuro */
+  border: 1px solid color-mix(in srgb, var(--bone) 9%, transparent);
   background-color: var(--wine);
   box-shadow: 0 26px 60px -34px rgb(0 0 0 / 0.95);
   overflow: hidden;
@@ -653,9 +655,9 @@ button { font: inherit; color: inherit; }
   z-index: -1;
   background: linear-gradient(180deg,
     color-mix(in srgb, var(--ink) 12%, transparent) 0%,
-    color-mix(in srgb, var(--ink) 34%, transparent) 34%,
-    color-mix(in srgb, var(--ink) 88%, transparent) 52%,
-    var(--ink) 82%);
+    color-mix(in srgb, var(--ink) 34%, transparent) 36%,
+    color-mix(in srgb, var(--ink) 88%, transparent) 56%,
+    var(--ink) 84%);
 }
 
 .trava--1 { --trava-img: url('../img/trava-1.webp'); }
