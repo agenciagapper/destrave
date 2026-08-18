@@ -1,0 +1,27 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Dependências / build (o deploy da Hostinger não roda build)
+node_modules/
+dist/
+
+# Ambiente
+.env
+.env.*
+!.env.example
+
+# Arquivos de trabalho que não vão para o servidor
+/_fontes/
+*.psd
+*.ai
+*.fig
+
+# Config local do Claude Code (não publicar)
+.claude/

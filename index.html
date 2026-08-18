@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== SEO / OG — ajustar domínio e imagem quando estiverem definidos ===== -->
+  <title>Destrave · Comunicar bem não é dom, é técnica</title>
+  <meta name="description" content="Em 3 dias você aprende o passo a passo que organiza voz, corpo e mente e sobe no palco para provar, na prática, que a sua fala mudou.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://SEU-DOMINIO.com.br/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Destrave · Comunicar bem não é dom, é técnica">
+  <meta property="og:description" content="Em 3 dias você aprende o passo a passo que organiza voz, corpo e mente e sobe no palco para provar, na prática, que a sua fala mudou.">
+  <meta property="og:image" content="https://SEU-DOMINIO.com.br/assets/img/og-image.jpg">
+  <meta property="og:url" content="https://SEU-DOMINIO.com.br/">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#120309">
+
+  <link rel="icon" href="assets/img/logo-destrave.png" type="image/png">
+
+  <link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/hero-760.webp" as="image" media="(max-width: 760px)" fetchpriority="high">
+  <link rel="preload" href="assets/img/hero-1200.webp" as="image" media="(min-width: 761px) and (max-width: 1399px)" fetchpriority="high">
+  <link rel="preload" href="assets/img/hero-1920.webp" as="image" media="(min-width: 1400px)" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#hero">Pular para o conteúdo</a>
+
+  <!-- ============================================================
+       BARRA FIXA — chamada de vaga + contagem regressiva
+       Data do evento: alterar data-deadline aqui e no texto da hero
+       ============================================================ -->
+  <div class="topbar">
+    <div class="topbar__inner">
+      <p class="topbar__call">
+        <strong>Garanta sua vaga.</strong>
+        <span class="topbar__call-long">Evento exclusivo e com vagas limitadas.</span>
+        <span class="topbar__call-short">Vagas limitadas.</span>
+      </p>
+
+      <div class="countdown" id="countdown" data-deadline="2026-09-12T19:00:00-03:00">
+        <p class="sr-only" id="countdown-a11y">Contagem regressiva para o início do evento.</p>
+        <div class="countdown__unit">
+          <span class="countdown__num" data-unit="days">00</span>
+          <span class="countdown__label">dias</span>
+        </div>
+        <span class="countdown__sep" aria-hidden="true">:</span>
+        <div class="countdown__unit">
+          <span class="countdown__num" data-unit="hours">00</span>
+          <span class="countdown__label">hrs</span>
+        </div>
+        <span class="countdown__sep" aria-hidden="true">:</span>
+        <div class="countdown__unit">
+          <span class="countdown__num" data-unit="minutes">00</span>
+          <span class="countdown__label">min</span>
+        </div>
+        <span class="countdown__sep countdown__sep--tick" aria-hidden="true">:</span>
+        <div class="countdown__unit">
+          <span class="countdown__num" data-unit="seconds">00</span>
+          <span class="countdown__label">seg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DOBRA 1 — HERO
+       ============================================================ -->
+  <header class="hero" id="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+
+      <img class="hero__logo reveal" src="assets/img/logo-destrave.png"
+           alt="Curso Destrave" width="636" height="223" fetchpriority="high">
+
+      <h1 class="hero__title reveal">
+        Comunicar bem não é dom, é técnica.
+        <span class="hero__title-em">E técnica se aprende.</span>
+      </h1>
+
+      <p class="hero__subtitle reveal">
+        Você sabe o que quer dizer, mas na hora de falar, trava. Em 3 dias, você
+        aprende o passo a passo que organiza voz, corpo e mente, e sobe no palco
+        pra provar, na prática, que a sua fala mudou.
+      </p>
+
+      <!-- Data e cidade: confirmar antes de publicar -->
+      <p class="hero__when reveal">
+        <span class="hero__when-item">12, 13 e 14 de setembro</span>
+        <span class="hero__when-dot" aria-hidden="true"></span>
+        <span class="hero__when-item">São Paulo, SP</span>
+      </p>
+
+      <!-- Trocar a div inteira pelo iframe do player quando o vídeo estiver pronto -->
+      <div class="vsl reveal">
+        <div class="vsl__frame">
+          <button class="vsl__play" type="button" aria-label="Assistir ao vídeo do evento">
+            <span class="vsl__play-icon" aria-hidden="true"></span>
+          </button>
+          <p class="vsl__hint">Espaço reservado para o vídeo</p>
+        </div>
+      </div>
+
+      <a class="btn btn--primary hero__cta reveal" href="#formulario">
+        Quero Destravar Minha Comunicação
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         TRANSIÇÃO — as três etapas do evento, na ordem em que acontecem
+         ============================================================ -->
+    <section class="steps" aria-label="As três etapas do evento">
+      <ol class="steps__list">
+        <li class="steps__item">
+          <span class="steps__num">1</span>
+          <span class="steps__label">Descubra a sua trava</span>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">2</span>
+          <span class="steps__label">Aprenda a técnica</span>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">3</span>
+          <span class="steps__label">Treine no palco</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 2 — a dor: em qual das três travas a pessoa se encaixa
+         Imagens dos cards: trava-1/2/3.webp são provisórias.
+         ============================================================ -->
+    <section class="travas" id="dobra-2">
+      <div class="travas__intro" data-reveal>
+        <h2 class="travas__title">
+          A sua trava tem nome e não é <span class="travas__title-em">“falta de jeito”.</span>
+        </h2>
+        <p class="travas__lead">
+          Quem trava na hora de falar quase sempre esbarra em uma destas três
+          coisas. Veja em qual você se encaixa.
+        </p>
+      </div>
+
+      <ul class="travas__grid">
+
+        <li class="trava trava--1" data-reveal>
+          <div class="trava__body">
+            <p class="trava__tag">Trava 1 · Insegurança</p>
+            <h3 class="trava__title">O branco na hora H</h3>
+            <p class="trava__text">
+              Você preparou tudo, sabe o assunto — mas quando os olhos viram pra
+              você, o coração dispara e a ideia some.
+            </p>
+            <ul class="trava__list">
+              <li>Ensaia sozinho e trava na frente dos outros</li>
+              <li>Deixa passar a vez pra não se expor</li>
+              <li>Sai da reunião pensando “eu queria ter falado”</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="trava trava--2" data-reveal>
+          <div class="trava__body">
+            <p class="trava__tag">Trava 2 · Falta de técnica</p>
+            <h3 class="trava__title">Ninguém te ensinou</h3>
+            <p class="trava__text">
+              Falar em público é técnica — respiração, estrutura, ritmo, uso do
+              corpo. E isso não se aprende no improviso.
+            </p>
+            <ul class="trava__list">
+              <li>Você fala, mas se enrola e perde o fio</li>
+              <li>Não sabe como começar nem como fechar</li>
+              <li>A mensagem boa se perde no caminho</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="trava trava--3" data-reveal>
+          <div class="trava__body">
+            <p class="trava__tag">Trava 3 · Autoimagem e voz</p>
+            <h3 class="trava__title">“Eu sou travado assim”</h3>
+            <p class="trava__text">
+              Você se convenceu de que é tímido por natureza, não gosta da
+              própria voz e evita a câmera a todo custo.
+            </p>
+            <ul class="trava__list">
+              <li>Grava, se assiste, apaga e desiste</li>
+              <li>Acha que autoridade é coisa “dos outros”</li>
+              <li>Se cala — e vê o colega que fala melhor crescer</li>
+            </ul>
+          </div>
+        </li>
+
+      </ul>
+
+      <p class="travas__close" data-reveal>
+        Nenhuma dessas é um defeito de nascença.
+        <span class="travas__close-em">É uma trava com causa — e com um caminho pra destravar.</span>
+      </p>
+    </section>
+
+    <!-- ============================================================
+         PRÓXIMAS DOBRAS entram aqui
+         ============================================================ -->
+    <section id="formulario" class="placeholder-section">
+      <div class="container">
+        <p>Próxima etapa: formulário.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
