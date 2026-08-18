@@ -472,15 +472,17 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- 10. Transição: as três etapas ----------
-   Único bloco claro da página. Serve de respiro entre a hero e a
-   dobra 2, ambas escuras. Para testar a versão em vinho, trocar as
-   duas linhas marcadas abaixo pelos valores em comentário.
+   Faixa em vinho, não clara: o único bloco claro da página é a dobra 3,
+   onde a página vira da dor pro que a pessoa leva. Se a faixa também
+   fosse clara, o claro deixaria de ser um momento e viraria alternância.
+   Para voltar ao claro: background var(--bone) e color var(--ink) aqui,
+   e no .steps__num background var(--wine) e color var(--bone).
    ---------------------------------------------------- */
 .steps {
   padding-block: clamp(1.15rem, 2.6vw, 1.7rem);
   padding-inline: var(--gutter);
-  background: var(--bone);                                    /* vinho: var(--wine) */
-  color: var(--ink);                                          /* vinho: var(--bone) */
+  background: var(--wine);
+  color: var(--bone);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--flame) 55%, transparent);
 }
 
@@ -512,8 +514,10 @@ button { font: inherit; color: inherit; }
   width: 1.65rem;
   height: 1.65rem;
   border-radius: 50%;
-  background: var(--wine);                                    /* vinho: var(--flame) */
-  color: var(--bone);
+  /* Círculo em osso, numeral em vinho: no fundo escuro é o par que
+     mantém contraste de leitura num dígito de 12px. */
+  background: var(--bone);
+  color: var(--wine);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
@@ -755,7 +759,153 @@ button { font: inherit; color: inherit; }
   .js [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* ---------- 12. Placeholder das próximas dobras ---------- */
+/* ---------- 12. Dobra 3: o repertório ----------
+   Lista com fio, e não cards: a dobra 2 já entrega uma grade de cards e
+   repetir o formato deixaria a página monótona. Fundo claro porque é aqui
+   que a página vira da dor pro que a pessoa leva na mão.
+   ------------------------------------------------ */
+.repertorio {
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+  padding-inline: var(--gutter);
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.repertorio__intro {
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.repertorio__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* Vermelho puxado pro vinho: o flame cru dá 3,5:1 no fundo osso,
+     insuficiente pra um texto de 11px. Esta mistura passa de 5:1. */
+  color: color-mix(in srgb, var(--flame) 75%, var(--wine));
+}
+
+.repertorio__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+/* Bloco próprio: as duas frases do título são o antes e o depois,
+   e precisam cair sempre em duas linhas. */
+.repertorio__title-em {
+  display: block;
+  font-family: var(--font-emphasis);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.01em;
+  color: var(--flame);
+}
+
+.repertorio__lead {
+  max-width: 52ch;
+  margin: clamp(0.85rem, 2vw, 1.15rem) auto 0;
+  color: color-mix(in srgb, var(--ink) 68%, var(--bone));
+  font-size: var(--fs-sub);
+  text-wrap: pretty;
+}
+
+.repertorio__list {
+  width: 100%;
+  max-width: var(--measure);
+  margin: clamp(2.25rem, 5.5vw, 3.5rem) auto 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--wine) 20%, transparent);
+}
+
+/* Linha da lista: marca, nome e explicação.
+   Empilhado no mobile, três colunas a partir de 780px. */
+.skill {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: start;
+  gap: 0.25rem 0.9rem;
+  padding-block: clamp(1.15rem, 2.8vw, 1.6rem);
+  border-top: 1px solid color-mix(in srgb, var(--wine) 20%, transparent);
+}
+
+.skill__tick {
+  grid-row: span 2;
+  width: 1.5rem;
+  height: 1.125rem;
+  margin-top: 0.3rem;
+  overflow: visible;
+  transform: rotate(-4deg);
+}
+
+.skill__tick path {
+  fill: none;
+  stroke: var(--flame);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skill__name {
+  font-size: clamp(1.0625rem, 1rem + 0.45vw, 1.3125rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.skill__desc {
+  color: color-mix(in srgb, var(--ink) 66%, var(--bone));
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* A última linha sai do registro de trabalho e fala da vida:
+   a explicação vira a serifa itálica que a página usa pra ênfase. */
+.skill--fecho .skill__desc {
+  font-family: var(--font-emphasis);
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  color: var(--wine);
+}
+
+@media (min-width: 780px) {
+  .skill {
+    grid-template-columns: 2.25rem minmax(0, 17rem) minmax(0, 1fr);
+    align-items: baseline;
+    gap: clamp(1rem, 3vw, 2.25rem);
+  }
+  .skill__tick { grid-row: auto; margin-top: 0; align-self: center; }
+  .skill__name { align-self: center; }
+  .skill--fecho .skill__desc { align-self: center; }
+}
+
+/* A marca é riscada na hora em que a linha entra na tela: a lista é o
+   que a pessoa leva marcado no fim dos três dias. */
+.js .skill__tick path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  transition: stroke-dashoffset 520ms cubic-bezier(0.22, 0.61, 0.36, 1) 180ms;
+}
+.js .skill.is-visible .skill__tick path { stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .skill__tick path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+/* ---------- 13. Placeholder das próximas dobras ---------- */
 .placeholder-section {
   padding-block: var(--space-6);
   background: var(--ink);
