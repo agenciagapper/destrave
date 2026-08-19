@@ -86,6 +86,13 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
   `evento-mentor`, `evento-turma` e `evento-microfone` ficam no repositório
   como reserva para as próximas dobras — hoje não são usadas por nenhuma
   página.
+- **Retratos dos experts (dobra 5)**: `expert-rogerio`, `expert-roberto` e
+  `expert-amanda`, 800×1000 (4:5), tratados com a mesma receita dos cards
+  da dobra 2 — dessaturados, puxados pro quente e com a metade de baixo
+  caindo pro escuro, que é onde nome e bio entram. Para somar um expert,
+  copiar um `<li class="expert">` no trilho; o carrossel se ajusta sozinho
+  e as setas só aparecem quando algum card fica fora da tela. Para destacar
+  um card: somar `expert--destaque` e abrir o `<p class="expert__selo">`.
 - **Foto da hero**: o original `background-hero.png` (2,5 MB) fica no repositório
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a

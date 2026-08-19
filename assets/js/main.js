@@ -97,5 +97,52 @@
     revelar();
   }
 
+  /* ---------- Carrossel dos experts ----------
+     Trilho com scroll nativo e snap: o arraste e o teclado já funcionam
+     sem JS. Aqui só entram as setas, que aparecem apenas quando existe
+     card fora da tela.
+  --------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-carrossel]'), function (carrossel) {
+    var trilho = carrossel.querySelector('.carrossel__trilho');
+    var nav = carrossel.querySelector('.carrossel__nav');
+    if (!trilho || !nav) return;
+
+    var botoes = Array.prototype.slice.call(nav.querySelectorAll('[data-dir]'));
+
+    var passo = function () {
+      var card = trilho.querySelector('li');
+      if (!card) return trilho.clientWidth;
+      var gap = parseFloat(getComputedStyle(trilho).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    var sobra = function () {
+      return trilho.scrollWidth - trilho.clientWidth;
+    };
+
+    var atualizar = function () {
+      var excedente = sobra() > 4;
+      nav.hidden = !excedente;
+      if (!excedente) return;
+      var x = trilho.scrollLeft;
+      botoes[0].disabled = x <= 2;
+      botoes[1].disabled = x >= sobra() - 2;
+    };
+
+    botoes.forEach(function (botao) {
+      botao.addEventListener('click', function () {
+        var suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        trilho.scrollBy({
+          left: passo() * Number(botao.dataset.dir),
+          behavior: suave ? 'smooth' : 'auto'
+        });
+      });
+    });
+
+    trilho.addEventListener('scroll', atualizar, { passive: true });
+    window.addEventListener('resize', atualizar);
+    atualizar();
+  });
+
   /* Espaço reservado para a lógica do formulário (próxima etapa). */
 })();

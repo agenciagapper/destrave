@@ -441,6 +441,94 @@
     </section>
 
     <!-- ============================================================
+         DOBRA 5 — os experts, em carrossel
+         Cards no mesmo desenho da dobra 2 (foto 4:5, texto na metade de
+         baixo), só que arrastáveis. Para destacar um card, basta somar a
+         classe expert--destaque e abrir o <p class="expert__selo">.
+         Falta definir o segundo destaque.
+         ============================================================ -->
+    <section class="experts" id="dobra-5">
+
+      <div class="experts__intro" data-reveal>
+        <h2 class="experts__title">
+          Um fim de semana.
+          <span class="experts__title-em">Vários mestres da comunicação.</span>
+        </h2>
+        <p class="experts__lead">
+          Cada bloco é conduzido por quem domina uma peça específica da
+          comunicação — da técnica vocal à neurociência da trava.
+        </p>
+      </div>
+
+      <div class="carrossel" data-carrossel data-reveal>
+        <ul class="carrossel__trilho" id="trilho-experts" tabindex="0"
+            role="group" aria-label="Experts do evento, lista arrastável">
+
+          <li class="expert expert--destaque">
+            <img class="expert__foto" src="assets/img/expert-rogerio.webp"
+                 width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Rogério Magalhães">
+            <div class="expert__body">
+              <p class="expert__selo">Criador do método</p>
+              <p class="expert__assunto">Comunicação estratégica</p>
+              <h3 class="expert__nome">Rogério Magalhães</h3>
+              <p class="expert__bio">
+                Mestre em Comunicação Estratégica e criador do método Destrave.
+                Com 16 anos de experiência, ajuda pessoas tímidas a se tornarem
+                comunicadores magnéticos. Já impactou milhares de vidas com uma
+                abordagem prática e transformadora.
+              </p>
+            </div>
+          </li>
+
+          <li class="expert">
+            <img class="expert__foto" src="assets/img/expert-roberto.webp"
+                 width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Roberto Shinyashiki">
+            <div class="expert__body">
+              <p class="expert__assunto">Liderança e oratória</p>
+              <h3 class="expert__nome">Roberto Shinyashiki</h3>
+              <p class="expert__bio">
+                Escritor best seller, psiquiatra e palestrante brasileiro,
+                conhecido por suas obras sobre sucesso e comportamento humano.
+                Ele se destaca por abordar temas como comunicação, liderança e
+                oratória de forma clara e motivadora.
+              </p>
+            </div>
+          </li>
+
+          <li class="expert">
+            <img class="expert__foto" src="assets/img/expert-amanda.webp"
+                 width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Amanda Ribeiro">
+            <div class="expert__body">
+              <p class="expert__assunto">Comunicação corporativa</p>
+              <h3 class="expert__nome">Amanda Ribeiro</h3>
+              <p class="expert__bio">
+                Jornalista e sócia-diretora da RMA Educação, é especialista em
+                liderança e comunicação corporativa. Atua transformando empresas
+                por meio da comunicação com propósito, presença e verdade.
+              </p>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- As setas só aparecem quando há card fora da tela; o JS cuida disso -->
+        <div class="carrossel__nav" hidden>
+          <button class="carrossel__btn" type="button" data-dir="-1"
+                  aria-controls="trilho-experts" aria-label="Ver experts anteriores">
+            <span aria-hidden="true">←</span>
+          </button>
+          <button class="carrossel__btn" type="button" data-dir="1"
+                  aria-controls="trilho-experts" aria-label="Ver próximos experts">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          PRÓXIMAS DOBRAS entram aqui
          ============================================================ -->
     <section id="formulario" class="placeholder-section">
