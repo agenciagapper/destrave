@@ -1222,9 +1222,15 @@ button { font: inherit; color: inherit; }
   outline-offset: 4px;
 }
 
-/* Centraliza os cards quando todos cabem na tela */
+/* Centraliza os cards quando todos cabem na tela.
+   safe center é obrigatório aqui: com center puro, um trilho que estoura
+   a tela transborda pros dois lados e o primeiro card fica inalcançável
+   — o scroll não chega antes do zero. */
 @media (min-width: 1100px) {
-  .carrossel__trilho { justify-content: center; }
+  .carrossel__trilho {
+    justify-content: center;
+    justify-content: safe center;
+  }
 }
 
 .expert {
@@ -1351,7 +1357,225 @@ button { font: inherit; color: inherit; }
   cursor: default;
 }
 
-/* ---------- 15. Placeholder das próximas dobras ---------- */
+/* ---------- 15. Dobra 6: depoimentos em fita ----------
+   Uma fita só, e não duas linhas: com oito clipes, o que convence é ver
+   que a fita continua depois da borda. Duas linhas fechariam a contagem
+   numa grade e matariam esse gesto — e a página já tem grade na dobra 2.
+   Reaproveita o JS do carrossel da dobra 5; muda só a pele das setas,
+   que aqui ficam por cima das bordas, à la prateleira de streaming.
+   ------------------------------------------------------- */
+.depos {
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+  padding-inline: var(--gutter);
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.depos__intro {
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.depos__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--flame);
+}
+
+.depos__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.depos__title-em {
+  display: block;
+  font-family: var(--font-emphasis);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.01em;
+  color: var(--flame);
+}
+
+.depos__lead {
+  max-width: 52ch;
+  margin: clamp(0.85rem, 2vw, 1.15rem) auto 0;
+  color: var(--bone-dim);
+  font-size: var(--fs-sub);
+  text-wrap: pretty;
+}
+
+/* ----- A fita ----- */
+.carrossel--fita { position: relative; }
+
+.depos__fita {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-block: 0.25rem 0.75rem;
+  scroll-snap-type: x proximity;
+  /* Sem isso o snap encosta o card na borda da tela e come o primeiro */
+  scroll-padding-inline: var(--gutter);
+}
+
+.depo {
+  flex: 0 0 auto;
+  width: clamp(9.5rem, 42vw, 12.5rem);
+  scroll-snap-align: start;
+}
+
+.depo__poster {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--bone) 10%, transparent);
+  /* Espaço reservado: sem foto ainda, o pôster é um degradê da paleta */
+  background:
+    radial-gradient(120% 80% at 50% 8%, color-mix(in srgb, var(--wine-lift) 70%, transparent) 0%, transparent 60%),
+    linear-gradient(165deg, var(--wine) 0%, var(--ink) 82%);
+  overflow: hidden;
+  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 320ms ease, border-color 320ms ease;
+}
+
+/* Variação de ângulo pra fita não virar oito retângulos idênticos */
+.depo:nth-child(3n+2) .depo__poster {
+  background:
+    radial-gradient(110% 70% at 30% 12%, color-mix(in srgb, var(--wine-lift) 60%, transparent) 0%, transparent 58%),
+    linear-gradient(200deg, var(--wine) 0%, var(--ink) 78%);
+}
+.depo:nth-child(3n) .depo__poster {
+  background:
+    radial-gradient(130% 90% at 72% 6%, color-mix(in srgb, var(--flame) 22%, transparent) 0%, transparent 62%),
+    linear-gradient(150deg, var(--wine) 0%, var(--ink) 85%);
+}
+
+.depo:hover .depo__poster,
+.depo:focus-within .depo__poster {
+  transform: translateY(-6px) scale(1.03);
+  border-color: color-mix(in srgb, var(--flame) 55%, transparent);
+  box-shadow: 0 22px 44px -22px rgb(0 0 0 / 0.9);
+}
+
+.depo__num {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--bone) 45%, transparent);
+}
+
+.depo__tempo {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--bone-dim);
+}
+
+.depo__play {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--bone) 40%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+  cursor: pointer;
+  transition: background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.depo__play-icon {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 13px solid var(--bone);
+}
+
+.depo:hover .depo__play,
+.depo__play:focus-visible {
+  background: var(--flame);
+  border-color: var(--flame);
+  transform: scale(1.06);
+}
+.depo:hover .depo__play-icon { border-left-color: var(--bone); }
+
+.depo__nome {
+  margin-top: 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.depo__trava {
+  margin-top: 0.15rem;
+  color: var(--bone-dim);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.depos__nota {
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bone-dim) 70%, transparent);
+}
+
+/* ----- Setas por cima das bordas ----- */
+.carrossel--fita .carrossel__nav {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  margin-top: 0;
+  pointer-events: none;
+}
+
+.carrossel--fita .carrossel__btn {
+  position: absolute;
+  top: calc(50% - 2.5rem);
+  width: 2.5rem;
+  height: 3.75rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+.carrossel--fita .carrossel__btn[data-dir="-1"] { left: calc(var(--gutter) * -0.5); }
+.carrossel--fita .carrossel__btn[data-dir="1"]  { right: calc(var(--gutter) * -0.5); }
+
+.carrossel--fita .carrossel__btn:disabled { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .depo__poster,
+  .depo__play { transition: none; }
+  .depo:hover .depo__poster,
+  .depo:focus-within .depo__poster { transform: none; }
+}
+
+/* ---------- 16. Placeholder das próximas dobras ---------- */
 .placeholder-section {
   padding-block: var(--space-6);
   background: var(--ink);

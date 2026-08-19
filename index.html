@@ -529,6 +529,153 @@
     </section>
 
     <!-- ============================================================
+         DOBRA 6 — depoimentos em vídeo, fita única
+         Oito clipes numa fita que sangra dos dois lados: o corte na
+         borda é o que diz que tem mais. Os pôsteres são espaço
+         reservado — ao receber os vídeos, trocar .depo__poster pelo
+         player (ou por <img> de capa + modal) mantendo a proporção 9:16.
+         O carrossel reaproveita o mesmo JS da dobra 5.
+         ============================================================ -->
+    <section class="depos" id="dobra-6">
+
+      <div class="depos__intro" data-reveal>
+        <p class="depos__eyebrow">Depoimentos</p>
+        <h2 class="depos__title">
+          Oito pessoas.
+          <span class="depos__title-em">Oito jeitos de destravar.</span>
+        </h2>
+        <p class="depos__lead">
+          Cada uma chegou com uma trava diferente e terminou o domingo no
+          palco. Elas contam como foi.
+        </p>
+      </div>
+
+      <div class="carrossel carrossel--fita" data-carrossel data-reveal>
+        <ul class="carrossel__trilho depos__fita" id="trilho-depoimentos" tabindex="0"
+            role="group" aria-label="Depoimentos em vídeo, lista arrastável">
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">01</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 01 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">02</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 02 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">03</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 03 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">04</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 04 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">05</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 05 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">06</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 06 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">07</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 07 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+          <li class="depo">
+            <div class="depo__poster">
+              <span class="depo__num" aria-hidden="true">08</span>
+              <button class="depo__play" type="button"
+                      aria-label="Assistir ao depoimento 08 — vídeo ainda não publicado">
+                <span class="depo__play-icon" aria-hidden="true"></span>
+              </button>
+              <span class="depo__tempo" aria-hidden="true">0:00</span>
+            </div>
+            <p class="depo__nome">Nome do participante</p>
+            <p class="depo__trava">A trava dele, em uma linha</p>
+          </li>
+
+        </ul>
+
+        <div class="carrossel__nav" hidden>
+          <button class="carrossel__btn" type="button" data-dir="-1"
+                  aria-controls="trilho-depoimentos" aria-label="Ver depoimentos anteriores">
+            <span aria-hidden="true">←</span>
+          </button>
+          <button class="carrossel__btn" type="button" data-dir="1"
+                  aria-controls="trilho-depoimentos" aria-label="Ver próximos depoimentos">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="depos__nota" data-reveal>Espaço reservado para os oito vídeos.</p>
+    </section>
+
+    <!-- ============================================================
          PRÓXIMAS DOBRAS entram aqui
          ============================================================ -->
     <section id="formulario" class="placeholder-section">
