@@ -72,6 +72,20 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
   fuso, ex. `2026-09-12T19:00:00-03:00`) — alimenta a contagem regressiva.
 - `index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
 
+## Copy pendente de confirmação
+
+Trechos que não vieram do cliente e ainda precisam do aval dele:
+
+- **Dobra 5, campo "assunto" dos experts** (`.expert__assunto`):
+  *Comunicação estratégica*, *Liderança e oratória* e *Comunicação
+  corporativa* foram derivados das próprias bios, não informados. O tema
+  real de cada bloco pode ser outro.
+- **Dobra 5, segundo destaque**: só o card do Rogério está marcado. Falta
+  definir qual é o segundo e o texto do selo.
+- **Dobra 6, título e linha de apoio**: escritos aqui. A linha de apoio
+  afirma que todos os depoentes terminaram o domingo no palco; se algum
+  dos oito vídeos não for de quem subiu, a frase precisa mudar.
+
 ## Assets
 
 - **Fontes** ficam em `assets/fonts/` e são carregadas por `@font-face` local,
