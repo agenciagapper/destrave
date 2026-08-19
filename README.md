@@ -99,6 +99,13 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
   copiar um `<li class="expert">` no trilho; o carrossel se ajusta sozinho
   e as setas só aparecem quando algum card fica fora da tela. Para destacar
   um card: somar `expert--destaque` e abrir o `<p class="expert__selo">`.
+- **Depoimentos (dobra 6)**: os oito pôsteres ainda são espaço reservado —
+  degradês da paleta com número, play e duração, sem arquivo de imagem.
+  Quando os vídeos chegarem, trocar o conteúdo de `.depo__poster` pelo
+  player (ou por uma capa em `<img>` mais um modal), mantendo a proporção
+  9:16 e o texto de `.depo__nome` / `.depo__trava`. Se os vídeos vierem
+  na horizontal, mudar o `aspect-ratio` de `.depo__poster` e a largura de
+  `.depo` resolve — o resto da fita se ajusta.
 - **Foto da hero**: o original `background-hero.png` (2,5 MB) fica no repositório
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a
