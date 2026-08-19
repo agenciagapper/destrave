@@ -37,9 +37,14 @@ Enquanto o domínio não entra, a avaliação visual roda em
 `https://agenciagapper.github.io/destrave/`, servido da branch `main` na
 raiz. Cada push publica sozinho; o arquivo vazio `.nojekyll` desliga o
 processamento Jekyll, que não serve pra nada num site sem build e ignora
-caminhos começados com underline. Se um push não publicar (acontece quando
-a API do GitHub falha na hora), o botão *Re-run all jobs* no workflow
-"pages build and deployment", na aba Actions, refaz o deploy.
+caminhos começados com underline.
+
+Quando um push não dispara o build (o evento se perde se a API do GitHub
+falhar naquele instante), *Re-run* no workflow "pages build and deployment"
+não resolve — ele reconstrói o commit daquela execução, não a ponta da
+branch. O que refaz o deploy é gerar um evento novo: qualquer commit novo
+na `main`, ou trocar a origem em *Settings → Pages* (para None, salvar, e
+de volta para `main` / raiz).
 
 ## Deploy na Hostinger (Git)
 
