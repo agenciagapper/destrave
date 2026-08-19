@@ -916,43 +916,41 @@ button { font: inherit; color: inherit; }
   background: var(--ink);
 }
 
-/* Faixa de abertura, sangrando de ponta a ponta */
+/* Abertura: uma foto só, sangrando de ponta a ponta */
 .metodo__strip {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
   margin-inline: calc(var(--gutter) * -1);
 }
 
 .metodo__strip img {
+  display: block;
   width: 100%;
-  height: clamp(10rem, 26vw, 17rem);
+  height: clamp(13rem, 32vw, 26rem);
   object-fit: cover;
+  object-position: center;
 }
 
-/* No celular a faixa mostra duas fotos: com três, cada uma ficaria
-   estreita demais pra se ler o que está acontecendo na sala. */
-.metodo__strip-3 { display: none; }
-
-/* A base da faixa dissolve no fundo em vez de cortar reto */
+/* A dissolvência ocupa a metade de baixo e chega ao fundo cheio antes
+   do fim da foto: é dentro dela que o título entra. */
 .metodo__strip::after {
   content: '';
   position: absolute;
   inset: auto 0 0 0;
-  height: 45%;
-  background: linear-gradient(180deg, transparent 0%, var(--ink) 92%);
+  height: 62%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--ink) 72%, transparent) 52%,
+    var(--ink) 86%);
   pointer-events: none;
 }
 
-@media (min-width: 640px) {
-  .metodo__strip { grid-template-columns: repeat(3, 1fr); }
-  .metodo__strip-3 { display: block; }
-}
-
+/* Margem negativa: o título sobe pra dentro da dissolvência em vez de
+   começar depois dela. */
 .metodo__intro {
+  position: relative;
+  z-index: 1;
   max-width: 34rem;
-  margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+  margin: clamp(-5rem, -6vw, -2rem) auto 0;
   text-align: center;
 }
 
@@ -1087,7 +1085,6 @@ button { font: inherit; color: inherit; }
   border: 1px solid color-mix(in srgb, var(--bone) 9%, transparent);
 }
 
-.etapa__foto--palco { object-position: center 20%; }
 .etapa__foto--abraco { object-position: center 38%; }
 
 /* Etapa 02: os três pilares, separados por fio e não por caixa */
