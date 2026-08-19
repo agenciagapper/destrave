@@ -31,6 +31,16 @@ Abrir `index.html` no navegador já funciona. Para um servidor local:
 python -m http.server 8000
 ```
 
+## Prévia no GitHub Pages
+
+Enquanto o domínio não entra, a avaliação visual roda em
+`https://agenciagapper.github.io/destrave/`, servido da branch `main` na
+raiz. Cada push publica sozinho; o arquivo vazio `.nojekyll` desliga o
+processamento Jekyll, que não serve pra nada num site sem build e ignora
+caminhos começados com underline. Se um push não publicar (acontece quando
+a API do GitHub falha na hora), o botão *Re-run all jobs* no workflow
+"pages build and deployment", na aba Actions, refaz o deploy.
+
 ## Deploy na Hostinger (Git)
 
 1. Criar o repositório privado no GitHub e enviar o código.
