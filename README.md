@@ -35,16 +35,22 @@ python -m http.server 8000
 
 Enquanto o domínio não entra, a avaliação visual roda em
 `https://agenciagapper.github.io/destrave/`, servido da branch `main` na
-raiz. Cada push publica sozinho; o arquivo vazio `.nojekyll` desliga o
-processamento Jekyll, que não serve pra nada num site sem build e ignora
-caminhos começados com underline.
+raiz. O arquivo vazio `.nojekyll` desliga o processamento Jekyll, que não
+serve pra nada num site sem build e ignora caminhos começados com
+underline.
 
-Quando um push não dispara o build (o evento se perde se a API do GitHub
-falhar naquele instante), *Re-run* no workflow "pages build and deployment"
-não resolve — ele reconstrói o commit daquela execução, não a ponta da
-branch. O que refaz o deploy é gerar um evento novo: qualquer commit novo
-na `main`, ou trocar a origem em *Settings → Pages* (para None, salvar, e
-de volta para `main` / raiz).
+Nem todo push publica. Nesta sessão, os pushes feitos por `git push` a
+partir do agente pararam de gerar o build a partir de certo ponto: os
+commits chegam na `main`, mas nenhum "pages build and deployment" novo
+aparece na aba Actions. O sintoma bate com a regra do GitHub de não
+disparar workflow para push autenticado com token de app — commits criados
+pela API do GitHub ou pela interface web, que ficam atribuídos à conta,
+disparam normalmente.
+
+*Re-run* no workflow não resolve: ele reconstrói o commit daquela execução,
+não a ponta da branch. O que refaz o deploy é gerar um evento novo —
+qualquer commit pela interface web ou pela API, ou trocar a origem em
+*Settings → Pages* (para None, salvar, e de volta para `main` / raiz).
 
 ## Deploy na Hostinger (Git)
 
