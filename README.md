@@ -52,17 +52,65 @@ não a ponta da branch. O que refaz o deploy é gerar um evento novo —
 qualquer commit pela interface web ou pela API, ou trocar a origem em
 *Settings → Pages* (para None, salvar, e de volta para `main` / raiz).
 
+## Endereço de produção
+
+A página vai ao ar em **https://rmaeducacao.com.br/destrave/** — subpasta do
+domínio, não a raiz. Antes deste ajuste o deploy publicava na raiz, e é de lá
+que os arquivos precisam sair (ver *Se o repositório já estava publicando na
+raiz*, abaixo). Depois da mudança a raiz fica vazia até receber o site
+principal da RMA; se demorar, vale um `index.html` de uma linha em
+`public_html` redirecionando pra `/destrave/`, pra quem chegar por um link
+antigo não bater num 404.
+
+Todos os caminhos do projeto são relativos (`assets/css/style.css` no HTML,
+`../img/hero-1200.webp` no CSS), então a página funciona em qualquer pasta
+sem alteração de código. O que é absoluto e aponta pro endereço final são as
+três metatags de `index.html`: `canonical`, `og:image` e `og:url`. Se a URL
+mudar, mudar as três juntas.
+
+Acessar `rmaeducacao.com.br/destrave` sem a barra final funciona: o servidor
+redireciona pra versão com barra antes de servir o `index.html`.
+
 ## Deploy na Hostinger (Git)
 
 1. Criar o repositório privado no GitHub e enviar o código.
 2. hPanel → **Site** → **Avançado** → **Git**.
-3. Em *Criar novo repositório*: colar a URL do repo, branch `main`,
-   e deixar o diretório em branco (publica na raiz de `public_html`).
+3. Em *Criar novo repositório*: colar a URL do repo, branch `main`, e no
+   campo de diretório escrever **`destrave`**. É esse campo que define a
+   subpasta — a Hostinger cria `public_html/destrave` e copia o repositório
+   pra lá, o que serve a página em `rmaeducacao.com.br/destrave/`. Em branco,
+   publicaria na raiz e sobrescreveria o site principal.
 4. Repo privado: copiar a **chave SSH pública** que a Hostinger exibe e
    cadastrá-la no GitHub em *Settings → Deploy keys* do repositório.
 5. Cada atualização: botão **Deploy** no hPanel, ou configurar o **webhook**
    que a Hostinger fornece em *Settings → Webhooks* do GitHub para deploy
    automático a cada push.
+
+### Se o repositório já estava publicando na raiz
+
+A Hostinger não move arquivos ao trocar o diretório de um deploy existente,
+e não dá pra ter dois deploys apontando pra pastas diferentes com o mesmo
+repositório. O caminho é:
+
+1. hPanel → **Git**: remover o deploy antigo (isso só desconecta o repo, não
+   apaga nada de `public_html`).
+2. Gerenciador de arquivos: apagar de `public_html` o que veio deste
+   repositório — `index.html`, a pasta `assets/` e o `.nojekyll` — sem
+   encostar em nada mais que esteja lá.
+3. Criar o deploy de novo com o diretório `destrave`, seguindo os passos
+   acima, e rodar **Deploy**.
+4. Conferir `https://rmaeducacao.com.br/destrave/` — a página carrega com
+   imagens e fontes, e sem a barra final o servidor redireciona sozinho.
+
+### Se a subpasta der 404 ou cair no site principal
+
+Um `.htaccess` na raiz pode estar capturando a URL antes de o Apache achar a
+pasta. As regras padrão do WordPress não fazem isso — elas só reescrevem o
+que não é arquivo nem diretório existente —, mas redirecionamentos manuais
+e plugins de cache fazem. Conferindo pela ordem: a pasta `public_html/destrave`
+existe e tem `index.html` dentro; o `.htaccess` da raiz não tem `RewriteRule`
+sem as condições `!-f` / `!-d`; e nenhum plugin de redirecionamento pega
+`/destrave`.
 
 ## Data do evento
 
@@ -124,6 +172,11 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a
   foto, gerar as três novamente.
+- **Imagem de compartilhamento**: `og-image.jpg` (1200×630, 82 KB) é o que
+  aparece na prévia de link do WhatsApp, Instagram e Facebook. Foi recortada
+  de `background-hero.png`. JPEG de propósito: WebP falha na prévia de alguns
+  aplicativos. Ao trocar, manter o nome, a proporção 1,91:1 e o formato — e
+  rodar o *Sharing Debugger* do Facebook pra limpar o cache da prévia antiga.
 
 ## Onde ajustar a identidade visual
 
