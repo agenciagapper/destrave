@@ -177,8 +177,8 @@ quando o item abre. Somar pergunta é copiar um `.faq__item`.
 As seis perguntas e respostas vieram da página
 `rogeriomagalhaes.com/destrave-sua-comunicacao-v3`, a pedido do cliente.
 A única alteração foi a data: lá está a edição de março de 2026, e aqui
-vale a data desta página, setembro. As duas precisam mudar juntas quando
-a data mudar (ver *Data do evento*).
+vale a data desta página. As duas precisam mudar juntas quando a data
+mudar (ver *Data do evento*).
 
 O rodapé fecha com a logo, a linha do evento, o botão de contato no
 WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
@@ -189,7 +189,7 @@ WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
 Aparece em dois lugares e os dois precisam ser alterados juntos:
 
 - `index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
-  fuso, ex. `2026-09-12T19:00:00-03:00`) — alimenta a contagem regressiva.
+  fuso, ex. `2026-09-04T19:00:00-03:00`) — alimenta a contagem regressiva.
 - `index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
 - `index.html`, pílula `.oferta__meta` da dobra 7.
 - `index.html`, resposta da pergunta *Quais são os dias e os horários* na
@@ -212,12 +212,17 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 - **Dobra 6, grafia do sobrenome**: o título do vídeo no canal da RMA diz
   *Patrícia Sanches*, e foi essa a grafia usada. Se o correto for
   *Sanchez*, muda no card.
-- **Dobra 6, título e linha de apoio**: a versão anterior dizia *como
+- **Dobra 6, título e linha de apoio**: a versão original dizia *como
   falava na sexta* e afirmava que todos terminaram *o domingo no palco*.
-  As duas frases pressupunham um evento de sexta a domingo, e esta edição
-  cai em sábado, domingo e segunda. O título passou a falar em *chegada*,
-  que não depende do dia da semana, e a linha de apoio deixou de afirmar
-  o palco, que nenhum dos cinco vídeos comprova.
+  As duas frases foram trocadas quando a data da página ainda era 12, 13
+  e 14 de setembro, que cai em sábado, domingo e segunda e derrubava as
+  duas. Com a data corrigida para 4, 5 e 6, que é sexta, sábado e
+  domingo, *na sexta* volta a ser verdade e pode ser restaurado no
+  título se preferirem a versão mais concreta. Está como *na chegada*,
+  que não depende do dia da semana e sobrevive à próxima troca de data.
+  Já a linha de apoio segue sem afirmar o palco, e isso não tem a ver com
+  o calendário: nenhum dos cinco vídeos comprova que aquelas pessoas
+  subiram no palco.
 - **Dobra 7, selo do card de preço**: está escrito *Vagas limitadas*, que
   é o que a barra fixa já diz. Se existir lote com percentual de desconto
   definido, é aqui que ele entra, no lugar do selo atual.
