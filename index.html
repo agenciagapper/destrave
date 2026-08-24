@@ -101,13 +101,26 @@
         <span class="hero__when-item">São Paulo, SP</span>
       </p>
 
-      <!-- Trocar a div inteira pelo iframe do player quando o vídeo estiver pronto -->
+      <!-- preload="none": o mp4 só começa a baixar no clique, então o
+           peso do vídeo não entra no carregamento da hero. Os controles
+           nativos aparecem junto com o play (ver main.js). -->
       <div class="vsl reveal">
         <div class="vsl__frame">
-          <button class="vsl__play" type="button" aria-label="Assistir ao vídeo do evento">
+          <video class="vsl__video" id="vsl-video"
+                 poster="assets/img/vsl-poster.webp"
+                 preload="none" playsinline
+                 width="1280" height="720">
+            <source src="assets/video/hero-vsl.mp4" type="video/mp4">
+            <p class="vsl__fallback">
+              Seu navegador não reproduz este vídeo.
+              <a href="assets/video/hero-vsl.mp4">Baixe o arquivo</a> para assistir.
+            </p>
+          </video>
+
+          <button class="vsl__play" type="button" data-tocar-vsl
+                  aria-label="Assistir ao vídeo do evento">
             <span class="vsl__play-icon" aria-hidden="true"></span>
           </button>
-          <p class="vsl__hint">Espaço reservado para o vídeo</p>
         </div>
       </div>
 
@@ -534,10 +547,10 @@
 
     <!-- ============================================================
          DOBRA 6 — depoimentos em vídeo, fita única
-         Oito clipes numa fita que sangra dos dois lados: o corte na
-         borda é o que diz que tem mais. Os pôsteres são espaço
-         reservado — ao receber os vídeos, trocar .depo__poster pelo
-         player (ou por <img> de capa + modal) mantendo a proporção 9:16.
+         Cinco clipes numa fita que sangra dos dois lados: o corte na
+         borda é o que diz que tem mais. Os vídeos são verticais e ficam
+         no YouTube; o card carrega só a capa, e o iframe entra no clique
+         (ver fachada dos depoimentos em main.js).
          O carrossel reaproveita o mesmo JS da dobra 5.
          ============================================================ -->
     <section class="depos" id="dobra-6">
@@ -546,11 +559,11 @@
         <p class="depos__eyebrow">Depoimentos</p>
         <h2 class="depos__title">
           Todos aqui travavam como você.
-          <span class="depos__title-em">Nenhum fala hoje como falava na sexta.</span>
+          <span class="depos__title-em">Nenhum fala hoje como falava na chegada.</span>
         </h2>
         <p class="depos__lead">
-          Cada uma chegou com uma trava diferente e terminou o domingo no
-          palco. Elas contam como foi.
+          Cada um chegou com uma trava diferente. Nestes vídeos, eles contam
+          o que mudou.
         </p>
       </div>
 
@@ -559,107 +572,71 @@
             role="group" aria-label="Depoimentos em vídeo, lista arrastável">
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="iTaWHYQysAk"
+                    aria-label="Assistir ao depoimento de Participante do Destrave">
+              <img class="depo__capa" src="assets/img/depo-1.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">01</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 01 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Participante do Destrave</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="KEMyKEvRkw4"
+                    aria-label="Assistir ao depoimento de Paulo Colombo, Ginecologista">
+              <img class="depo__capa" src="assets/img/depo-2.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">02</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 02 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Paulo Colombo</p>
+            <p class="depo__trava">Ginecologista</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="-adSMKjG6oc"
+                    aria-label="Assistir ao depoimento de Matheus, Arquiteto">
+              <img class="depo__capa" src="assets/img/depo-3.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">03</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 03 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Matheus</p>
+            <p class="depo__trava">Arquiteto</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="wob_LssQQ5o"
+                    aria-label="Assistir ao depoimento de Dra. Patrícia Sanches, Médica">
+              <img class="depo__capa" src="assets/img/depo-4.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">04</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 04 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Dra. Patrícia Sanches</p>
+            <p class="depo__trava">Médica</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="MZHvsHiOvp0"
+                    aria-label="Assistir ao depoimento de Participante do Destrave">
+              <img class="depo__capa" src="assets/img/depo-5.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">05</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 05 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">06</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 06 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">07</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 07 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">08</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 08 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Participante do Destrave</p>
           </li>
 
         </ul>
@@ -676,7 +653,6 @@
         </div>
       </div>
 
-      <p class="depos__nota" data-reveal>Espaço reservado para os oito vídeos.</p>
     </section>
 
     <!-- ============================================================

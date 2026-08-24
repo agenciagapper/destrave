@@ -160,6 +160,52 @@
     obrigado: 'obrigado.html'
   };
 
+  /* ---------- Vídeo da hero ----------
+     O <video> nasce com preload="none" e sem controles: até o clique,
+     o que existe na tela é só o pôster. O clique liga os controles
+     nativos e some com o botão.
+  ------------------------------------------ */
+  var vsl = document.getElementById('vsl-video');
+  var vslPlay = document.querySelector('[data-tocar-vsl]');
+
+  if (vsl && vslPlay) {
+    var quadro = vsl.closest('.vsl__frame');
+
+    vslPlay.addEventListener('click', function () {
+      vsl.controls = true;
+      quadro.classList.add('is-tocando');
+      var p = vsl.play();
+      /* Se a política de autoplay barrar, os controles já estão à mostra
+         e a pessoa aperta o play nativo. */
+      if (p && p['catch']) p['catch'](function () {});
+      vsl.focus({ preventScroll: true });
+    });
+  }
+
+  /* ---------- Fachada dos depoimentos ----------
+     Cinco iframes do YouTube no carregamento custariam mais que o resto
+     da página somado. O card carrega só a capa em webp, e o iframe entra
+     no clique, já tocando, no lugar do próprio botão.
+  ------------------------------------------------ */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-yt]'), function (poster) {
+    poster.addEventListener('click', function () {
+      var id = poster.dataset.yt;
+      var iframe = document.createElement('iframe');
+
+      /* nocookie: não planta cookie de rastreio de quem só assiste. */
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+                   '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+      iframe.className = 'depo__player';
+      iframe.title = poster.getAttribute('aria-label') || 'Depoimento em vídeo';
+      iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+
+      poster.replaceWith(iframe);
+      iframe.focus({ preventScroll: true });
+    });
+  });
+
   /* ---------- Modal de captação ---------- */
   var modal = document.getElementById('modal-lead');
   var form = document.getElementById('form-lead');

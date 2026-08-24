@@ -12,6 +12,7 @@ Landing page estática (HTML + CSS + JS puro, sem build) com formulário.
 │   ├── css/style.css     tokens de design + estilos
 │   ├── js/main.js        scripts (sem dependências)
 │   ├── img/              imagens, logo, favicon, og-image
+│   ├── video/            o mp4 da hero
 │   └── fonts/            fontes locais (@font-face)
 ├── .gitignore
 ├── .editorconfig
@@ -204,9 +205,19 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   real de cada bloco pode ser outro.
 - **Dobra 5, segundo destaque**: só o card do Rogério está marcado. Falta
   definir qual é o segundo e o texto do selo.
-- **Dobra 6, título e linha de apoio**: escritos aqui. A linha de apoio
-  afirma que todos os depoentes terminaram o domingo no palco; se algum
-  dos oito vídeos não for de quem subiu, a frase precisa mudar.
+- **Dobra 6, nome de dois depoentes**: os vídeos `iTaWHYQysAk` e
+  `MZHvsHiOvp0` vieram sem nome e sem profissão, e os cards estão com
+  *Participante do Destrave* no lugar. É a pendência mais visível da
+  página hoje.
+- **Dobra 6, grafia do sobrenome**: o título do vídeo no canal da RMA diz
+  *Patrícia Sanches*, e foi essa a grafia usada. Se o correto for
+  *Sanchez*, muda no card.
+- **Dobra 6, título e linha de apoio**: a versão anterior dizia *como
+  falava na sexta* e afirmava que todos terminaram *o domingo no palco*.
+  As duas frases pressupunham um evento de sexta a domingo, e esta edição
+  cai em sábado, domingo e segunda. O título passou a falar em *chegada*,
+  que não depende do dia da semana, e a linha de apoio deixou de afirmar
+  o palco, que nenhum dos cinco vídeos comprova.
 - **Dobra 7, selo do card de preço**: está escrito *Vagas limitadas*, que
   é o que a barra fixa já diz. Se existir lote com percentual de desconto
   definido, é aqui que ele entra, no lugar do selo atual.
@@ -247,17 +258,54 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   copiar um `<li class="expert">` no trilho; o carrossel se ajusta sozinho
   e as setas só aparecem quando algum card fica fora da tela. Para destacar
   um card: somar `expert--destaque` e abrir o `<p class="expert__selo">`.
-- **Depoimentos (dobra 6)**: os oito pôsteres ainda são espaço reservado —
-  degradês da paleta com número, play e duração, sem arquivo de imagem.
-  Quando os vídeos chegarem, trocar o conteúdo de `.depo__poster` pelo
-  player (ou por uma capa em `<img>` mais um modal), mantendo a proporção
-  9:16 e o texto de `.depo__nome` / `.depo__trava`. Se os vídeos vierem
-  na horizontal, mudar o `aspect-ratio` de `.depo__poster` e a largura de
-  `.depo` resolve — o resto da fita se ajusta.
+- **Depoimentos (dobra 6)**: cinco vídeos verticais hospedados no YouTube.
+  O card não carrega o player: carrega a capa em webp e monta o `<iframe>`
+  só no clique, já tocando. Cinco iframes no carregamento custariam mais
+  que o resto da página somado, e a maioria das visitas não assiste a
+  nenhum. O embed sai pelo domínio `youtube-nocookie.com`.
+
+  O id do vídeo fica no `data-yt` do botão, e a capa em
+  `assets/img/depo-N.webp`. As capas vieram de
+  `i.ytimg.com/vi/<id>/oardefault.jpg`, que é a única variante que entrega
+  o quadro vertical inteiro: `maxresdefault` devolve 1280x720 com fundo
+  borrado nas laterais e cortaria a pessoa.
+
+  Somar depoimento é copiar um `<li class="depo">`, trocar `data-yt`, a
+  capa e o nome. A fita se ajusta sozinha e as setas só aparecem quando
+  algum card fica fora da tela.
+
+  | # | vídeo | quem |
+  |---|-------|------|
+  | 01 | `iTaWHYQysAk` | nome a confirmar |
+  | 02 | `KEMyKEvRkw4` | Paulo Colombo, ginecologista |
+  | 03 | `-adSMKjG6oc` | Matheus, arquiteto |
+  | 04 | `wob_LssQQ5o` | Dra. Patrícia Sanches, médica |
+  | 05 | `MZHvsHiOvp0` | nome a confirmar |
+
 - **Foto da hero**: o original `background-hero.png` (2,5 MB) fica no repositório
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a
   foto, gerar as três novamente.
+- **Vídeo da hero**: `assets/video/hero-vsl.mp4`, com o pôster em
+  `assets/img/vsl-poster.webp`. O `<video>` nasce com `preload="none"` e sem
+  controles, então até o clique o que existe na tela é só o pôster e o peso
+  do vídeo fica fora do carregamento da página.
+
+  O arquivo que o cliente mandou tinha 157 MB em **HEVC 10 bits**, e HEVC
+  não toca no Chrome do Android nem no Firefox, que é de onde vem o tráfego
+  de anúncio. Foi transcodificado para H.264 8 bits, que toca em tudo:
+
+  ```
+  ffmpeg -i original.mp4 -vf "scale=1280:720:flags=lanczos" \
+    -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 26 -preset slow \
+    -c:a aac -b:a 112k -ac 2 -movflags +faststart assets/video/hero-vsl.mp4
+  ```
+
+  Resultado: 30,8 MB, 1,2 Mbps, sem diferença visível (PSNR de 39,4 dB
+  contra a versão em CRF 23, que dava 44,5 MB). O `+faststart` põe o índice
+  do arquivo na frente, o que faz o vídeo começar a tocar durante o
+  download em vez de depois dele. Ao trocar o vídeo, repetir o comando e
+  gerar o pôster novo com `-ss <segundo> -frames:v 1`.
 - **Imagem de compartilhamento**: `og-image.jpg` (1200×630, 82 KB) é o que
   aparece na prévia de link do WhatsApp, Instagram e Facebook. Foi recortada
   de `background-hero.png`. JPEG de propósito: WebP falha na prévia de alguns
