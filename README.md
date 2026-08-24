@@ -189,7 +189,7 @@ WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
 Aparece em dois lugares e os dois precisam ser alterados juntos:
 
 - `index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
-  fuso, ex. `2026-09-04T19:00:00-03:00`) — alimenta a contagem regressiva.
+  fuso, ex. `2026-09-04T00:00:00-03:00`) — alimenta a contagem regressiva.
 - `index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
 - `index.html`, pílula `.oferta__meta` da dobra 7.
 - `index.html`, resposta da pergunta *Quais são os dias e os horários* na
@@ -226,10 +226,16 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 - **Dobra 7, selo do card de preço**: está escrito *Vagas limitadas*, que
   é o que a barra fixa já diz. Se existir lote com percentual de desconto
   definido, é aqui que ele entra, no lugar do selo atual.
-- **Dobra 8, horários do evento**: a pergunta é *Quais são os dias e os
-  horários*, e a resposta herdada da página de origem só dá os dias. Está
-  respondida com a data e as 20+ horas de imersão; se existir grade com
-  horário de início e término, é aqui que ela entra.
+- **Dobra 8, horários do evento**: a pergunta herdada da página de origem
+  era *Quais são os dias e os horários*, mas a resposta de lá só dava os
+  dias. Como a grade de horários não foi informada, a pergunta passou a
+  ser só *Quais são os dias do evento?*. Havendo horário de início e
+  término, dá pra devolver a pergunta ao formato original e completar a
+  resposta.
+
+  Pela mesma razão, o `data-deadline` mira `00:00:00` do dia 4 e não uma
+  hora de abertura: a contagem regressiva conta até o dia do evento, sem
+  cravar horário que ninguém confirmou.
 - **Dobra 7, condição de pagamento**: a referência que originou esta dobra
   mostra parcelamento e barra de vagas preenchidas. Ficaram de fora porque
   nenhum dos dois foi informado, e número de vaga preenchida sem base é o
