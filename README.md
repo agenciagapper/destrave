@@ -6,28 +6,37 @@ Landing page estática (HTML + CSS + JS puro, sem build) com formulário.
 
 ```
 .
-├── index.html            página do evento
-├── obrigado.html         destino do formulário, com o botão de WhatsApp
-├── assets/
-│   ├── css/style.css     tokens de design + estilos
-│   ├── js/main.js        scripts (sem dependências)
-│   ├── img/              imagens, logo, favicon, og-image
-│   ├── video/            o mp4 da hero
-│   └── fonts/            fontes locais (@font-face)
+├── index.html            só redireciona pra destrave/ (ver Endereço)
+├── destrave/             o site; vira a subpasta no servidor
+│   ├── index.html        página do evento
+│   ├── obrigado.html     destino do formulário, com o botão de WhatsApp
+│   └── assets/
+│       ├── css/style.css tokens de design + estilos
+│       ├── js/main.js    scripts (sem dependências)
+│       ├── img/          imagens, logo, favicon, og-image
+│       ├── video/        o mp4 da hero
+│       └── fonts/        fontes locais (@font-face)
+├── .nojekyll
 ├── .gitignore
 ├── .editorconfig
 └── README.md
 ```
 
+A pasta `destrave/` não é organização interna: é ela que produz o caminho
+`/destrave` no servidor. Mexer no nome dela muda a URL pública.
+
 ## Por que sem build
 
 O deploy por Git da Hostinger apenas copia os arquivos do repositório para
 `public_html`. Não roda `npm install` nem `npm run build`. Por isso o projeto
-entrega HTML/CSS/JS finais direto na raiz — o que está no repo é o que vai ao ar.
+entrega HTML/CSS/JS finais prontos: o que está no repo é, arquivo por arquivo,
+o que vai ao ar.
 
 ## Rodar localmente
 
-Abrir `index.html` no navegador já funciona. Para um servidor local:
+Abrir `destrave/index.html` no navegador já funciona. Para um servidor local,
+rodar na raiz do repositório e acessar `http://localhost:8000/destrave/`, que
+reproduz o caminho de produção:
 
 ```bash
 python -m http.server 8000
@@ -35,11 +44,16 @@ python -m http.server 8000
 
 ## Prévia no GitHub Pages
 
-Enquanto o domínio não entra, a avaliação visual roda em
-`https://agenciagapper.github.io/destrave/`, servido da branch `main` na
-raiz. O arquivo vazio `.nojekyll` desliga o processamento Jekyll, que não
-serve pra nada num site sem build e ignora caminhos começados com
-underline.
+A avaliação visual roda em
+`https://agenciagapper.github.io/destrave/destrave/`, servido da branch
+`main` na raiz. O `destrave` repetido não é engano: o primeiro é o nome do
+repositório, que o Pages usa como caminho, e o segundo é a pasta do site.
+Abrir `https://agenciagapper.github.io/destrave/` também funciona, porque o
+redirecionamento da raiz cai lá.
+
+O arquivo vazio `.nojekyll` desliga o processamento Jekyll, que não serve
+pra nada num site sem build e ignora caminhos começados com underline. Ele
+fica na raiz do repositório, que é onde o Pages procura.
 
 Nem todo push publica. Nesta sessão, os pushes feitos por `git push` a
 partir do agente pararam de gerar o build a partir de certo ponto: os
@@ -56,116 +70,66 @@ qualquer commit pela interface web ou pela API, ou trocar a origem em
 
 ## Endereço de produção
 
-A página vai ao ar em **https://rmaeducacao.com.br/destrave/** — subpasta do
-domínio, não a raiz. Antes deste ajuste o deploy publicava na raiz, e é de lá
-que os arquivos precisam sair (ver *Se o repositório já estava publicando na
-raiz*, abaixo). Depois da mudança a raiz fica vazia até receber o site
-principal da RMA; se demorar, vale um `index.html` de uma linha em
-`public_html` redirecionando pra `/destrave/`, pra quem chegar por um link
-antigo não bater num 404.
+A página vai ao ar em **https://rmaeducacao.com.br/destrave/**.
 
-Todos os caminhos do projeto são relativos (`assets/css/style.css` no HTML,
-`../img/hero-1200.webp` no CSS), então a página funciona em qualquer pasta
-sem alteração de código. O que é absoluto e aponta pro endereço final são as
-três metatags de `index.html`: `canonical`, `og:image` e `og:url`. Se a URL
-mudar, mudar as três juntas.
+A subpasta vem do próprio repositório, e não de configuração do painel. O
+deploy Git da Hostinger copia o repositório inteiro para `public_html`, com
+o campo de diretório em branco. Como o site mora em `destrave/`, ele
+aterrissa em `public_html/destrave/` e o caminho aparece sozinho. Renomear
+essa pasta muda a URL pública, e não há nada no hPanel pra mexer junto.
 
-Acessar `rmaeducacao.com.br/destrave` sem a barra final funciona: o servidor
-redireciona pra versão com barra antes de servir o `index.html`.
+Na raiz sobra um `index.html` que só redireciona pra `destrave/`, pra quem
+chegar por um link antigo não bater num 404. Ele leva a query e a âncora
+adiante, senão um anúncio que apontasse pra raiz perderia as UTMs no salto
+e o lead chegaria no Make sem origem. O destino é relativo de propósito: um
+`/destrave/` absoluto funcionaria na Hostinger e entraria em laço no
+GitHub Pages, onde a raiz publicada já é `/destrave/`. Esse arquivo some no
+dia em que o site principal da RMA ocupar a raiz.
+
+Todos os caminhos internos são relativos (`assets/css/style.css` no HTML,
+`../img/hero-1200.webp` no CSS), então a página funciona em qualquer pasta.
+O que é absoluto e aponta pro endereço final são três metatags de
+`destrave/index.html`: `canonical`, `og:image` e `og:url`. Se a URL mudar,
+mudar as três juntas.
+
+Acessar `rmaeducacao.com.br/destrave` sem a barra final funciona: o
+servidor redireciona pra versão com barra antes de servir o `index.html`.
 
 ## Deploy na Hostinger (Git)
 
-1. Criar o repositório privado no GitHub e enviar o código.
-2. hPanel → **Site** → **Avançado** → **Git**.
-3. Em *Criar novo repositório*: colar a URL do repo, branch `main`, e no
-   campo de diretório escrever **`destrave`**. É esse campo que define a
-   subpasta — a Hostinger cria `public_html/destrave` e copia o repositório
-   pra lá, o que serve a página em `rmaeducacao.com.br/destrave/`. Em branco,
-   publicaria na raiz e sobrescreveria o site principal.
-4. Repo privado: copiar a **chave SSH pública** que a Hostinger exibe e
+1. hPanel → **Site** → **Avançado** → **Git**.
+2. Em *Criar novo repositório*: colar a URL do repo, branch `main`, e
+   **deixar o campo de diretório em branco**. A subpasta já vem de dentro
+   do repositório; preencher `destrave` aqui publicaria em
+   `public_html/destrave/destrave/`.
+3. Repo privado: copiar a **chave SSH pública** que a Hostinger exibe e
    cadastrá-la no GitHub em *Settings → Deploy keys* do repositório.
-5. Cada atualização: botão **Deploy** no hPanel, ou configurar o **webhook**
-   que a Hostinger fornece em *Settings → Webhooks* do GitHub para deploy
-   automático a cada push.
+4. Cada atualização: botão **Deploy** no hPanel, ou o **webhook** que a
+   Hostinger fornece, cadastrado em *Settings → Webhooks* do GitHub, para
+   deploy automático a cada push.
 
-### Se o repositório já estava publicando na raiz
+### Sobras da versão que publicava na raiz
 
-A Hostinger não move arquivos ao trocar o diretório de um deploy existente,
-e não dá pra ter dois deploys apontando pra pastas diferentes com o mesmo
-repositório. O caminho é:
+Antes desta mudança o site era publicado na raiz de `public_html`. O deploy
+Git não apaga arquivo que saiu do repositório, então `assets/` e
+`obrigado.html` continuam na raiz do servidor, parados na versão daquele
+dia. O `index.html` da raiz é sobrescrito pelo redirecionamento e não
+precisa de nada.
 
-1. hPanel → **Git**: remover o deploy antigo (isso só desconecta o repo, não
-   apaga nada de `public_html`).
-2. Gerenciador de arquivos: apagar de `public_html` o que veio deste
-   repositório — `index.html`, a pasta `assets/` e o `.nojekyll` — sem
-   encostar em nada mais que esteja lá.
-3. Criar o deploy de novo com o diretório `destrave`, seguindo os passos
-   acima, e rodar **Deploy**.
-4. Conferir `https://rmaeducacao.com.br/destrave/` — a página carrega com
-   imagens e fontes, e sem a barra final o servidor redireciona sozinho.
+Não quebram nada, mas servem uma cópia velha da página em endereços que
+ninguém deveria alcançar, e ocupam os 30 MB do vídeo à toa. Apagar
+`public_html/assets/` e `public_html/obrigado.html` pelo Gerenciador de
+Arquivos resolve, sem encostar em `public_html/destrave/`.
 
 ### Se a subpasta der 404 ou cair no site principal
 
-Um `.htaccess` na raiz pode estar capturando a URL antes de o Apache achar a
-pasta. As regras padrão do WordPress não fazem isso — elas só reescrevem o
-que não é arquivo nem diretório existente —, mas redirecionamentos manuais
-e plugins de cache fazem. Conferindo pela ordem: a pasta `public_html/destrave`
-existe e tem `index.html` dentro; o `.htaccess` da raiz não tem `RewriteRule`
-sem as condições `!-f` / `!-d`; e nenhum plugin de redirecionamento pega
-`/destrave`.
-
-## Dobra de oferta e captação
-
-A dobra 7 (`.oferta`, âncora `#formulario`) fecha a página com dois cards
-claros: a lista do que está incluído e o card de preço. O número do preço
-sai borrado por `filter: blur()` no CSS, com o `R$` nítido ao lado. O borrão
-é gesto visual, não segurança: o valor está no HTML e aparece pra quem abrir
-o inspetor. Se em algum momento ele não puder vazar, o caminho é tirar o
-número do HTML e injetá-lo só depois da conversão.
-
-O CTA abre o modal de captação. Qualquer elemento com `data-abrir-modal`
-abre o mesmo modal, então dá pra somar um CTA em outra dobra sem tocar no JS.
-
-### O que trocar quando a campanha muda
-
-Tudo o que é volátil está no objeto `CONFIG`, no topo de `assets/js/main.js`:
-
-- `webhook` — para onde o lead é enviado. Hoje aponta pro cenário do Make.
-  Se ficar vazio, o formulário valida, pula o envio e vai direto pra página
-  de obrigado: a página continua funcionando, mas nenhum lead é gravado.
-- `waFone` e `waMsg` — o WhatsApp de destino, em formato internacional e só
-  dígitos, e a mensagem que já vem escrita pro lead.
-- `obrigado` — o arquivo de destino após o envio.
-
-O preço fica em `index.html`, no `<span class="preco__num">`. A data e a
-cidade da pílula da dobra 7 repetem as da hero e mudam junto com elas
-(ver *Data do evento*).
-
-### O que o lead carrega
-
-O envio monta um JSON com os seis campos do formulário, mais `utm_source`,
-`utm_medium`, `utm_campaign`, `utm_content`, `utm_term` e `referrer`, lidos
-da URL na hora que a página abre. Vão junto o WhatsApp já normalizado em
-`whatsapp_digitos` (com o 55 na frente, pronto pra discagem), o horário do
-envio, a URL e o título da página.
-
-O POST sai como `text/plain` de propósito: é um dos tipos que o navegador
-libera sem *preflight* de CORS, e os webhooks de automação parseiam o corpo
-como JSON do mesmo jeito. Se o webhook demorar, o lead não fica preso: o
-redirecionamento acontece na resposta ou em 2,5 segundos, o que vier antes.
-
-O POST foi testado contra o cenário do Make com o payload exato que o
-navegador monta: resposta `200 Accepted` e cabeçalho
-`access-control-allow-origin: *`, que é o que o `fetch` precisa pra rodar
-a partir do domínio sem ser barrado.
-
-### Página de obrigado
-
-`obrigado.html` é uma página separada, fora do índice de busca
-(`noindex, nofollow`), com o botão verde que abre a conversa no WhatsApp.
-As UTMs seguem na query string, e o primeiro nome de quem preencheu chega
-por `sessionStorage` pra saudação. Sem esse dado a frase fecha sozinha, o
-que cobre quem abre a URL direto.
+Um `.htaccess` na raiz pode estar capturando a URL antes de o Apache achar
+a pasta. As regras padrão do WordPress não fazem isso, porque só reescrevem
+o que não é arquivo nem diretório existente, mas redirecionamentos manuais
+e plugins de cache fazem. Conferindo pela ordem: a pasta
+`public_html/destrave` existe e tem `index.html` dentro; o `.htaccess` da
+raiz não tem `RewriteRule` sem as condições `!-f` / `!-d`; e nenhum plugin
+de redirecionamento pega `/destrave`.
 
 ## Dúvidas frequentes e rodapé
 
@@ -188,11 +152,11 @@ WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
 
 Aparece em dois lugares e os dois precisam ser alterados juntos:
 
-- `index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
+- `destrave/index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
   fuso, ex. `2026-09-04T00:00:00-03:00`) — alimenta a contagem regressiva.
-- `index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
-- `index.html`, pílula `.oferta__meta` da dobra 7.
-- `index.html`, resposta da pergunta *Quais são os dias e os horários* na
+- `destrave/index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
+- `destrave/index.html`, pílula `.oferta__meta` da dobra 7.
+- `destrave/index.html`, resposta da pergunta sobre os dias na
   dobra 8, e a linha `.rodape__evento`.
 
 ## Copy pendente de confirmação
@@ -244,7 +208,7 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 
 ## Assets
 
-- **Fontes** ficam em `assets/fonts/` e são carregadas por `@font-face` local,
+- **Fontes** ficam em `destrave/assets/fonts/` e são carregadas por `@font-face` local,
   sem chamada ao Google Fonts: Archivo (títulos e corpo), Instrument Serif
   itálica (linha de ênfase) e IBM Plex Mono (dígitos do contador).
 - **Cards da dobra 2**: `trava-1.webp` (o branco na hora H), `trava-2.webp`
@@ -276,7 +240,7 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   nenhum. O embed sai pelo domínio `youtube-nocookie.com`.
 
   O id do vídeo fica no `data-yt` do botão, e a capa em
-  `assets/img/depo-N.webp`. As capas vieram de
+  `destrave/assets/img/depo-N.webp`. As capas vieram de
   `i.ytimg.com/vi/<id>/oardefault.jpg`, que é a única variante que entrega
   o quadro vertical inteiro: `maxresdefault` devolve 1280x720 com fundo
   borrado nas laterais e cortaria a pessoa.
@@ -297,8 +261,8 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   como fonte, mas quem vai ao ar são as versões WebP `hero-760`, `hero-1200` e
   `hero-1920`, servidas por media query no CSS (128 KB na maior). Ao trocar a
   foto, gerar as três novamente.
-- **Vídeo da hero**: `assets/video/hero-vsl.mp4`, com o pôster em
-  `assets/img/vsl-poster.webp`. O `<video>` nasce com `preload="none"` e sem
+- **Vídeo da hero**: `destrave/assets/video/hero-vsl.mp4`, com o pôster em
+  `destrave/assets/img/vsl-poster.webp`. O `<video>` nasce com `preload="none"` e sem
   controles, então até o clique o que existe na tela é só o pôster e o peso
   do vídeo fica fora do carregamento da página.
 
@@ -309,7 +273,7 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   ```
   ffmpeg -i original.mp4 -vf "scale=1280:720:flags=lanczos" \
     -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 26 -preset slow \
-    -c:a aac -b:a 112k -ac 2 -movflags +faststart assets/video/hero-vsl.mp4
+    -c:a aac -b:a 112k -ac 2 -movflags +faststart destrave/assets/video/hero-vsl.mp4
   ```
 
   Resultado: 30,8 MB, 1,2 Mbps, sem diferença visível (PSNR de 39,4 dB
@@ -326,4 +290,4 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 ## Onde ajustar a identidade visual
 
 Cores, fontes e escala tipográfica ficam em `:root`, no topo de
-`assets/css/style.css`. Trocar ali reflete na página inteira.
+`destrave/assets/css/style.css`. Trocar ali reflete na página inteira.
