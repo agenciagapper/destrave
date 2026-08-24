@@ -1575,10 +1575,516 @@ button { font: inherit; color: inherit; }
   .depo:focus-within .depo__poster { transform: none; }
 }
 
-/* ---------- 16. Placeholder das próximas dobras ---------- */
-.placeholder-section {
-  padding-block: var(--space-6);
-  background: var(--ink);
-  color: var(--bone-dim);
-  border-top: 1px solid color-mix(in srgb, var(--wine-lift) 45%, transparent);
+/* ---------- 16. Dobra 7: a oferta ----------
+   Dois cards claros sobre o vinho. A dobra 6 termina no escuro, e a
+   página inteira é escura fora da dobra 3 — o claro aqui é o que faz o
+   olho parar no preço depois de sete dobras de leitura corrida.
+   O número do preço sai borrado por filtro, com o "R$" nítido ao lado:
+   é o borrão que dá o motivo pra clicar. Não é segurança, o valor está
+   no HTML; é só o gesto visual.
+   ------------------------------------------------- */
+.oferta {
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+  padding-inline: var(--gutter);
+  background:
+    radial-gradient(120% 90% at 50% 0%,
+      color-mix(in srgb, var(--wine) 85%, var(--ink)) 0%,
+      var(--ink) 62%);
+  border-top: 1px solid color-mix(in srgb, var(--flame) 18%, transparent);
 }
+
+.oferta__intro {
+  /* Mais largo que os outros intros da página porque a pílula de baixo
+     carrega quatro itens e, a 40rem, quebrava com a cidade sozinha. */
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.oferta__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--flame);
+}
+
+.oferta__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.oferta__title-em {
+  display: block;
+  font-family: var(--font-emphasis);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.01em;
+  color: var(--flame);
+}
+
+/* Mesma pílula da hero: repete o gesto que abriu a página. */
+.oferta__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.7rem;
+  width: fit-content;
+  margin: clamp(1rem, 2.5vw, 1.4rem) auto 0;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--flame) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+  font-size: clamp(0.625rem, 0.6rem + 0.2vw, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+
+.oferta__meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--flame);
+  flex: none;
+}
+
+/* ----- A grade dos dois cards ----- */
+.oferta__grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+  max-width: var(--container);
+  margin: clamp(2.25rem, 5vw, 3.25rem) auto 0;
+}
+
+@media (min-width: 900px) {
+  .oferta__grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}
+
+.oferta__card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3.4vw, 2.5rem);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fff 0%, var(--bone) 100%);
+  color: var(--ink);
+  box-shadow: 0 30px 60px -32px rgba(0, 0, 0, 0.55);
+}
+
+.oferta__card-title {
+  margin-bottom: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ----- Card 1: a lista do que entra ----- */
+.incluso__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.incluso__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: clamp(0.875rem, 0.85rem + 0.14vw, 0.9375rem);
+  line-height: 1.45;
+  /* Cinza-vinho: o preto puro num card creme fica duro pra ler em bloco. */
+  color: color-mix(in srgb, var(--ink) 78%, var(--bone-dim));
+}
+
+.incluso__lista li b {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* O flame cru dá 3,5:1 no fundo osso. Esta mistura passa de 5:1,
+   a mesma correção usada na dobra 3. */
+.incluso__check {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  fill: none;
+  stroke: color-mix(in srgb, var(--flame) 75%, var(--wine));
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Card 2: o preço ----- */
+.oferta__preco {
+  gap: 0.75rem;
+  /* O card do lado tem sete linhas e puxa a altura. Centralizar aqui
+     transforma a sobra num respiro em volta do preço, em vez de um
+     buraco entre a nota e o botão. */
+  justify-content: center;
+  box-shadow:
+    0 30px 60px -30px rgba(0, 0, 0, 0.55),
+    0 0 0 1px color-mix(in srgb, var(--flame) 22%, transparent),
+    0 20px 60px -30px color-mix(in srgb, var(--flame) 30%, transparent);
+}
+
+.preco__selo {
+  align-self: flex-start;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--flame) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--flame) 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--flame) 78%, var(--wine));
+}
+
+.preco__label {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 55%, var(--bone-dim));
+}
+
+.preco__valor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--wine-lift);
+}
+
+/* O borrão. Sem seleção e sem cursor: copiar o número mataria o gesto. */
+.preco__num {
+  filter: blur(14px);
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.preco__nota {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--ink) 72%, var(--bone-dim));
+}
+
+.preco__cta {
+  width: 100%;
+  margin-top: clamp(0.75rem, 2vw, 1.25rem);
+  padding-block: 1.15rem;
+}
+/* O card é claro: a sombra do botão precisa cair mais fechada aqui. */
+.preco__cta { box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--flame) 90%, transparent); }
+
+.preco__rodape {
+  margin-top: 0.85rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: center;
+  color: color-mix(in srgb, var(--ink) 60%, var(--bone-dim));
+}
+
+/* ---------- 17. Modal de captação ----------
+   Um <div hidden> e não <dialog>: o showModal() do dialog ainda tem
+   buraco de suporte em WebView do Android, que é de onde vem boa parte
+   do tráfego de anúncio. O foco fica preso por JS.
+   ------------------------------------------- */
+.modal[hidden] { display: none; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal__fundo {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 82%, black);
+  backdrop-filter: blur(3px);
+}
+
+.modal__card {
+  position: relative;
+  width: min(100%, 30rem);
+  margin-block: auto;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fff 0%, var(--bone) 100%);
+  color: var(--ink);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  animation: modal-entra 240ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes modal-entra {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal__fechar {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.modal__fechar:hover { background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.modal__fechar svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.modal__titulo {
+  padding-right: 2.5rem;
+  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.modal__sub {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--ink) 72%, var(--bone-dim));
+}
+
+/* ----- O formulário ----- */
+.lead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: clamp(1.25rem, 3vw, 1.6rem);
+}
+
+.lead__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lead__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.lead__label em {
+  font-style: normal;
+  color: color-mix(in srgb, var(--flame) 80%, var(--wine));
+}
+
+.lead__input {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1rem; /* 16px: abaixo disso o iOS dá zoom ao focar */
+  line-height: 1.3;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.lead__input::placeholder { color: color-mix(in srgb, var(--ink) 42%, var(--bone-dim)); }
+
+.lead__input:focus {
+  outline: none;
+  border-color: var(--flame);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--flame) 22%, transparent);
+}
+
+/* Seta própria: o select nativo herda a do sistema e destoa do card. */
+.lead__select {
+  appearance: none;
+  padding-right: 2.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23120309' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+/* Marcado pelo JS quando o campo é enviado inválido. */
+.lead__input.is-invalido {
+  border-color: #c0233a;
+  box-shadow: 0 0 0 3px rgba(192, 35, 58, 0.16);
+}
+
+.lead__erro {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #a81b30;
+}
+.lead__erro[hidden] { display: none; }
+
+.lead__enviar {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding-block: 1.05rem;
+  box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--flame) 90%, transparent);
+}
+.lead__enviar[disabled] {
+  opacity: 0.65;
+  cursor: progress;
+  transform: none;
+}
+
+/* Trava a rolagem do fundo enquanto o modal está aberto. */
+body.modal-aberto { overflow: hidden; }
+
+/* ---------- 18. Página de obrigado ----------
+   Página sem barra fixa e sem contagem: quem chegou aqui já converteu,
+   e a pressa da home só atrapalharia o próximo passo, que é o WhatsApp.
+   -------------------------------------------- */
+.pagina-obrigado {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(120% 80% at 50% 0%,
+      color-mix(in srgb, var(--wine) 85%, var(--ink)) 0%,
+      var(--ink) 60%);
+}
+
+.obrigado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(1.5rem, 6vw, 3rem) var(--gutter);
+}
+
+.obrigado__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 34rem);
+  padding: clamp(1.75rem, 5vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--flame) 22%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+  text-align: center;
+  animation: rise 620ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.obrigado__logo {
+  width: clamp(9rem, 26vw, 11.5rem);
+  height: auto;
+}
+
+.obrigado__selo {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--flame) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--flame) 40%, transparent);
+}
+.obrigado__selo svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--flame);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.obrigado__titulo {
+  margin-top: clamp(1rem, 3vw, 1.35rem);
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.obrigado__texto {
+  max-width: 40ch;
+  margin-top: clamp(0.75rem, 2vw, 1rem);
+  color: var(--bone-dim);
+  font-size: var(--fs-sub);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Verde do WhatsApp, e não o flame da marca: aqui o botão precisa
+   dizer para onde leva antes de dizer de quem é. */
+.obrigado__wpp {
+  width: min(100%, 22rem);
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  gap: 0.6rem;
+  background: #25d366;
+  color: #08240f;
+  box-shadow: 0 14px 34px -12px rgba(37, 211, 102, 0.55);
+}
+.obrigado__wpp:hover {
+  background: #3ce07a;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px -14px rgba(60, 224, 122, 0.6);
+}
+.obrigado__wpp:active { transform: translateY(0); }
+
+.obrigado__wpp-icone {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.obrigado__voltar {
+  margin-top: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--bone-dim);
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+.obrigado__voltar:hover { color: var(--bone); }

@@ -6,7 +6,8 @@ Landing page estática (HTML + CSS + JS puro, sem build) com formulário.
 
 ```
 .
-├── index.html            página única
+├── index.html            página do evento
+├── obrigado.html         destino do formulário, com o botão de WhatsApp
 ├── assets/
 │   ├── css/style.css     tokens de design + estilos
 │   ├── js/main.js        scripts (sem dependências)
@@ -112,6 +113,56 @@ existe e tem `index.html` dentro; o `.htaccess` da raiz não tem `RewriteRule`
 sem as condições `!-f` / `!-d`; e nenhum plugin de redirecionamento pega
 `/destrave`.
 
+## Dobra de oferta e captação
+
+A dobra 7 (`.oferta`, âncora `#formulario`) fecha a página com dois cards
+claros: a lista do que está incluído e o card de preço. O número do preço
+sai borrado por `filter: blur()` no CSS, com o `R$` nítido ao lado. O borrão
+é gesto visual, não segurança: o valor está no HTML e aparece pra quem abrir
+o inspetor. Se em algum momento ele não puder vazar, o caminho é tirar o
+número do HTML e injetá-lo só depois da conversão.
+
+O CTA abre o modal de captação. Qualquer elemento com `data-abrir-modal`
+abre o mesmo modal, então dá pra somar um CTA em outra dobra sem tocar no JS.
+
+### O que trocar quando a campanha muda
+
+Tudo o que é volátil está no objeto `CONFIG`, no topo de `assets/js/main.js`:
+
+- `webhook` — para onde o lead é enviado (Make, Zapier, n8n, RD Station).
+  **Está vazio.** Enquanto estiver, o formulário valida, pula o envio e vai
+  direto pra página de obrigado, ou seja, a página funciona antes de a
+  automação existir, mas nenhum lead é gravado em lugar nenhum. Colar a URL
+  do webhook aqui liga o envio.
+- `waFone` e `waMsg` — o WhatsApp de destino, em formato internacional e só
+  dígitos, e a mensagem que já vem escrita pro lead.
+- `obrigado` — o arquivo de destino após o envio.
+
+O preço fica em `index.html`, no `<span class="preco__num">`. A data e a
+cidade da pílula da dobra 7 repetem as da hero e mudam junto com elas
+(ver *Data do evento*).
+
+### O que o lead carrega
+
+O envio monta um JSON com os seis campos do formulário, mais `utm_source`,
+`utm_medium`, `utm_campaign`, `utm_content`, `utm_term` e `referrer`, lidos
+da URL na hora que a página abre. Vão junto o WhatsApp já normalizado em
+`whatsapp_digitos` (com o 55 na frente, pronto pra discagem), o horário do
+envio, a URL e o título da página.
+
+O POST sai como `text/plain` de propósito: é um dos tipos que o navegador
+libera sem *preflight* de CORS, e os webhooks de automação parseiam o corpo
+como JSON do mesmo jeito. Se o webhook demorar, o lead não fica preso: o
+redirecionamento acontece na resposta ou em 2,5 segundos, o que vier antes.
+
+### Página de obrigado
+
+`obrigado.html` é uma página separada, fora do índice de busca
+(`noindex, nofollow`), com o botão verde que abre a conversa no WhatsApp.
+As UTMs seguem na query string, e o primeiro nome de quem preencheu chega
+por `sessionStorage` pra saudação. Sem esse dado a frase fecha sozinha, o
+que cobre quem abre a URL direto.
+
 ## Data do evento
 
 Aparece em dois lugares e os dois precisam ser alterados juntos:
@@ -133,6 +184,14 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 - **Dobra 6, título e linha de apoio**: escritos aqui. A linha de apoio
   afirma que todos os depoentes terminaram o domingo no palco; se algum
   dos oito vídeos não for de quem subiu, a frase precisa mudar.
+- **Dobra 7, selo do card de preço**: está escrito *Vagas limitadas*, que
+  é o que a barra fixa já diz. Se existir lote com percentual de desconto
+  definido, é aqui que ele entra, no lugar do selo atual.
+- **Dobra 7, condição de pagamento**: a referência que originou esta dobra
+  mostra parcelamento e barra de vagas preenchidas. Ficaram de fora porque
+  nenhum dos dois foi informado, e número de vaga preenchida sem base é o
+  tipo de dado que o público checa. Havendo parcelamento real, ele cabe
+  entre a nota e o botão.
 
 ## Assets
 

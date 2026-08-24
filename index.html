@@ -680,15 +680,190 @@
     </section>
 
     <!-- ============================================================
-         PRÓXIMAS DOBRAS entram aqui
+         DOBRA 7 — a oferta: o que está incluído e o investimento
+         O valor fica borrado de propósito: quem quer o número preenche
+         o formulário. Trocar o preço em .preco__num e no data-valor.
          ============================================================ -->
-    <section id="formulario" class="placeholder-section">
-      <div class="container">
-        <p>Próxima etapa: formulário.</p>
+    <section class="oferta" id="formulario">
+
+      <div class="oferta__intro">
+        <p class="oferta__eyebrow" data-reveal>O investimento</p>
+        <h2 class="oferta__title" data-reveal>
+          Destrave Sua
+          <span class="oferta__title-em">Comunicação</span>
+        </h2>
+        <p class="oferta__meta" data-reveal>
+          <span class="oferta__meta-item">3 dias presenciais</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">20+ horas de imersão</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">12, 13 e 14 de setembro</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">São Paulo, SP</span>
+        </p>
+      </div>
+
+      <div class="oferta__grid">
+
+        <!-- ----- Card 1: o que entra ----- -->
+        <div class="oferta__card oferta__incluso" data-reveal>
+          <h3 class="oferta__card-title">Tudo o que está incluído</h3>
+          <ul class="incluso__lista">
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>3 dias de imersão presencial (20+ horas)</b> com o método completo</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>O Tripé da Comunicação</b>: voz, corpo e mente, treinados na prática</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>3 gravações progressivas</b> (3, 5 e 7 min) mais autoavaliação guiada</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Hora do Show</b>: sua apresentação real de 10 min no palco</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Método P.A.M.</b> de posicionamento e autoridade</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Aulas com todos os especialistas</b>, mais Roberto Shinyashiki e Rogério Magalhães</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Apostila, crachá e caneta</b>, coffee break nos 3 dias e certificado</span>
+          </li>
+          </ul>
+        </div>
+
+        <!-- ----- Card 2: o preço ----- -->
+        <div class="oferta__card oferta__preco" data-reveal>
+          <p class="preco__selo">Vagas limitadas</p>
+          <p class="preco__label">Investimento</p>
+
+          <p class="preco__valor">
+            <span class="preco__rs">R$</span>
+            <span class="preco__num" aria-hidden="true">3.997</span>
+            <span class="sr-only">Valor liberado no contato com a equipe.</span>
+          </p>
+
+          <p class="preco__nota">
+            O valor com desconto é liberado no contato com a nossa equipe.
+          </p>
+
+          <button class="btn btn--primary preco__cta" type="button" data-abrir-modal>
+            Liberar Desconto Agora
+          </button>
+
+          <p class="preco__rodape">
+            Você preenche, e a nossa equipe chama no WhatsApp para confirmar a vaga.
+          </p>
+        </div>
+
       </div>
     </section>
 
   </main>
+
+  <!-- ============================================================
+       MODAL DE CAPTAÇÃO
+       Abre em qualquer elemento com [data-abrir-modal]. O destino do
+       lead e o WhatsApp ficam no bloco CONFIG no topo de main.js.
+       ============================================================ -->
+  <div class="modal" id="modal-lead" hidden>
+    <div class="modal__fundo" data-fechar-modal></div>
+
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <button class="modal__fechar" type="button" data-fechar-modal aria-label="Fechar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <h2 class="modal__titulo" id="modal-titulo">Libere o seu desconto</h2>
+      <p class="modal__sub">
+        Preencha os seus dados. Nossa equipe entra em contato pelo WhatsApp para
+        confirmar a sua vaga e o valor com desconto.
+      </p>
+
+      <form class="lead" id="form-lead" novalidate>
+
+        <label class="lead__campo">
+          <span class="lead__label">Seu nome <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="text" name="nome" required
+                 autocomplete="name" placeholder="Como podemos te chamar">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Seu melhor e-mail <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="email" name="email" required
+                 autocomplete="email" placeholder="voce@email.com.br">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">WhatsApp <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="tel" name="whatsapp" required
+                 id="lead-whatsapp" autocomplete="tel" inputmode="tel"
+                 maxlength="16" placeholder="(11) 91234-5678">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Qual sua renda média mensal? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="renda" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Até R$2.500</option>
+            <option>R$2.500 a R$5.000</option>
+            <option>R$5.000 a R$10.000</option>
+            <option>R$10.000 a R$15.000</option>
+            <option>R$15.000 a R$20.000</option>
+            <option>Acima de R$20.000</option>
+          </select>
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Qual seu cargo? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="cargo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>CEO / Fundador / Sócio</option>
+            <option>Diretor / C-Level (CFO, CMO, CTO, etc.)</option>
+            <option>Gerente / Head / Coordenador</option>
+            <option>Especialista / Analista</option>
+            <option>Assistente / Operacional</option>
+            <option>Autônomo / Profissional Liberal</option>
+            <option>Não trabalho</option>
+          </select>
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Em que podemos te ajudar? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="objetivo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Medo de falar em público</option>
+            <option>Insegurança diante de câmeras e redes sociais</option>
+            <option>Dificuldade em liderar conversas e apresentações</option>
+            <option>Problemas com timidez e presença pessoal</option>
+            <option>Quero desenvolver habilidades de comunicação para minha profissão</option>
+          </select>
+        </label>
+
+        <!-- Preenchidos pelo JS a partir da URL, para o lead chegar com origem -->
+        <input type="hidden" name="utm_source">
+        <input type="hidden" name="utm_medium">
+        <input type="hidden" name="utm_campaign">
+        <input type="hidden" name="utm_content">
+        <input type="hidden" name="utm_term">
+        <input type="hidden" name="referrer">
+
+        <p class="lead__erro" id="lead-erro" role="alert" hidden></p>
+
+        <button class="btn btn--primary lead__enviar" type="submit">
+          Enviar e liberar meu desconto
+        </button>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/js/main.js" defer></script>
 </body>
