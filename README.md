@@ -129,11 +129,9 @@ abre o mesmo modal, então dá pra somar um CTA em outra dobra sem tocar no JS.
 
 Tudo o que é volátil está no objeto `CONFIG`, no topo de `assets/js/main.js`:
 
-- `webhook` — para onde o lead é enviado (Make, Zapier, n8n, RD Station).
-  **Está vazio.** Enquanto estiver, o formulário valida, pula o envio e vai
-  direto pra página de obrigado, ou seja, a página funciona antes de a
-  automação existir, mas nenhum lead é gravado em lugar nenhum. Colar a URL
-  do webhook aqui liga o envio.
+- `webhook` — para onde o lead é enviado. Hoje aponta pro cenário do Make.
+  Se ficar vazio, o formulário valida, pula o envio e vai direto pra página
+  de obrigado: a página continua funcionando, mas nenhum lead é gravado.
 - `waFone` e `waMsg` — o WhatsApp de destino, em formato internacional e só
   dígitos, e a mensagem que já vem escrita pro lead.
 - `obrigado` — o arquivo de destino após o envio.
@@ -155,6 +153,11 @@ libera sem *preflight* de CORS, e os webhooks de automação parseiam o corpo
 como JSON do mesmo jeito. Se o webhook demorar, o lead não fica preso: o
 redirecionamento acontece na resposta ou em 2,5 segundos, o que vier antes.
 
+O POST foi testado contra o cenário do Make com o payload exato que o
+navegador monta: resposta `200 Accepted` e cabeçalho
+`access-control-allow-origin: *`, que é o que o `fetch` precisa pra rodar
+a partir do domínio sem ser barrado.
+
 ### Página de obrigado
 
 `obrigado.html` é uma página separada, fora do índice de busca
@@ -163,6 +166,23 @@ As UTMs seguem na query string, e o primeiro nome de quem preencheu chega
 por `sessionStorage` pra saudação. Sem esse dado a frase fecha sozinha, o
 que cobre quem abre a URL direto.
 
+## Dúvidas frequentes e rodapé
+
+A dobra 8 (`.faq`) usa `<details>` e `<summary>` puros: abre e fecha sem
+JS nenhum, e o leitor de tela anuncia expandido ou recolhido sozinho, sem
+`aria-expanded` na mão. O ícone é um mais que gira 45 graus e vira um xis
+quando o item abre. Somar pergunta é copiar um `.faq__item`.
+
+As seis perguntas e respostas vieram da página
+`rogeriomagalhaes.com/destrave-sua-comunicacao-v3`, a pedido do cliente.
+A única alteração foi a data: lá está a edição de março de 2026, e aqui
+vale a data desta página, setembro. As duas precisam mudar juntas quando
+a data mudar (ver *Data do evento*).
+
+O rodapé fecha com a logo, a linha do evento, o botão de contato no
+WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
+`CONFIG`) e o copyright.
+
 ## Data do evento
 
 Aparece em dois lugares e os dois precisam ser alterados juntos:
@@ -170,6 +190,9 @@ Aparece em dois lugares e os dois precisam ser alterados juntos:
 - `index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
   fuso, ex. `2026-09-12T19:00:00-03:00`) — alimenta a contagem regressiva.
 - `index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
+- `index.html`, pílula `.oferta__meta` da dobra 7.
+- `index.html`, resposta da pergunta *Quais são os dias e os horários* na
+  dobra 8, e a linha `.rodape__evento`.
 
 ## Copy pendente de confirmação
 
@@ -187,6 +210,10 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
 - **Dobra 7, selo do card de preço**: está escrito *Vagas limitadas*, que
   é o que a barra fixa já diz. Se existir lote com percentual de desconto
   definido, é aqui que ele entra, no lugar do selo atual.
+- **Dobra 8, horários do evento**: a pergunta é *Quais são os dias e os
+  horários*, e a resposta herdada da página de origem só dá os dias. Está
+  respondida com a data e as 20+ horas de imersão; se existir grade com
+  horário de início e término, é aqui que ela entra.
 - **Dobra 7, condição de pagamento**: a referência que originou esta dobra
   mostra parcelamento e barra de vagas preenchidas. Ficaram de fora porque
   nenhum dos dois foi informado, e número de vaga preenchida sem base é o

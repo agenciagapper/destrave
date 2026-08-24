@@ -1977,7 +1977,167 @@ button { font: inherit; color: inherit; }
 /* Trava a rolagem do fundo enquanto o modal está aberto. */
 body.modal-aberto { overflow: hidden; }
 
-/* ---------- 18. Página de obrigado ----------
+/* ---------- 18. Dobra 8: dúvidas frequentes ----------
+   <details> nativo: abre sem JS, e o leitor de tela já anuncia expandido
+   ou recolhido sem precisar de aria-expanded na mão. O ícone é um mais
+   que gira 45 graus e vira um xis quando o item abre.
+   ----------------------------------------------------- */
+.faq {
+  padding-block: clamp(3.5rem, 9vw, 6.5rem);
+  padding-inline: var(--gutter);
+  background: var(--ink);
+}
+
+.faq__intro {
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.faq__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--flame);
+}
+
+.faq__title {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.faq__title-em {
+  display: block;
+  font-family: var(--font-emphasis);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.01em;
+  color: var(--flame);
+}
+
+.faq__lista {
+  max-width: var(--measure);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  border-top: 1px solid color-mix(in srgb, var(--wine-lift) 50%, transparent);
+}
+
+.faq__item {
+  border-bottom: 1px solid color-mix(in srgb, var(--wine-lift) 50%, transparent);
+}
+
+.faq__pergunta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: clamp(1.1rem, 2.6vw, 1.5rem);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--transition);
+}
+/* O triângulo padrão do summary, que o Safari insiste em desenhar. */
+.faq__pergunta::-webkit-details-marker { display: none; }
+.faq__pergunta:hover { color: var(--ember); }
+
+.faq__icone {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--flame);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transition: transform var(--transition);
+}
+.faq__item[open] .faq__icone { transform: rotate(45deg); }
+
+.faq__resposta {
+  padding-bottom: clamp(1.1rem, 2.6vw, 1.5rem);
+  padding-right: clamp(0rem, 4vw, 2.5rem);
+  color: var(--bone-dim);
+  font-size: var(--fs-sub);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ---------- 19. Rodapé ---------- */
+.rodape {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  padding-inline: var(--gutter);
+  background: color-mix(in srgb, var(--wine) 55%, var(--ink));
+  border-top: 1px solid color-mix(in srgb, var(--flame) 20%, transparent);
+}
+
+.rodape__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+  max-width: var(--container);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.rodape__logo {
+  width: clamp(8rem, 22vw, 10rem);
+  height: auto;
+}
+
+.rodape__evento {
+  max-width: 34ch;
+  color: var(--bone-dim);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.rodape__wpp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid color-mix(in srgb, #25d366 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, #25d366 12%, transparent);
+  color: #6ff2a4;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  transition: background var(--transition), color var(--transition);
+}
+.rodape__wpp:hover {
+  background: color-mix(in srgb, #25d366 22%, transparent);
+  color: #a8f8c8;
+}
+
+.rodape__wpp-icone {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.rodape__copy {
+  margin-top: clamp(0.5rem, 1.5vw, 0.85rem);
+  color: color-mix(in srgb, var(--bone-dim) 75%, var(--wine));
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+/* ---------- 20. Página de obrigado ----------
    Página sem barra fixa e sem contagem: quem chegou aqui já converteu,
    e a pressa da home só atrapalharia o próximo passo, que é o WhatsApp.
    -------------------------------------------- */
