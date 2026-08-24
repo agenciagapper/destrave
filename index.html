@@ -4,17 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ===== SEO / OG — ajustar domínio e imagem quando estiverem definidos ===== -->
+  <!-- ===== SEO / OG ===== -->
   <title>Destrave · Comunicar bem não é dom, é técnica</title>
   <meta name="description" content="Em 3 dias você aprende o passo a passo que organiza voz, corpo e mente e sobe no palco para provar, na prática, que a sua fala mudou.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://SEU-DOMINIO.com.br/">
+  <link rel="canonical" href="https://rmaeducacao.com.br/destrave/">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Destrave · Comunicar bem não é dom, é técnica">
   <meta property="og:description" content="Em 3 dias você aprende o passo a passo que organiza voz, corpo e mente e sobe no palco para provar, na prática, que a sua fala mudou.">
-  <meta property="og:image" content="https://SEU-DOMINIO.com.br/assets/img/og-image.jpg">
-  <meta property="og:url" content="https://SEU-DOMINIO.com.br/">
+  <meta property="og:image" content="https://rmaeducacao.com.br/destrave/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plateia e palestrante durante uma edição do Destrave.">
+  <meta property="og:url" content="https://rmaeducacao.com.br/destrave/">
+  <meta property="og:site_name" content="RMA Educação">
   <meta property="og:locale" content="pt_BR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#120309">
@@ -43,7 +47,7 @@
         <span class="topbar__call-short">Vagas limitadas.</span>
       </p>
 
-      <div class="countdown" id="countdown" data-deadline="2026-09-12T19:00:00-03:00">
+      <div class="countdown" id="countdown" data-deadline="2026-09-04T00:00:00-03:00">
         <p class="sr-only" id="countdown-a11y">Contagem regressiva para o início do evento.</p>
         <div class="countdown__unit">
           <span class="countdown__num" data-unit="days">00</span>
@@ -92,18 +96,31 @@
 
       <!-- Data e cidade: confirmar antes de publicar -->
       <p class="hero__when reveal">
-        <span class="hero__when-item">12, 13 e 14 de setembro</span>
+        <span class="hero__when-item">4, 5 e 6 de setembro</span>
         <span class="hero__when-dot" aria-hidden="true"></span>
         <span class="hero__when-item">São Paulo, SP</span>
       </p>
 
-      <!-- Trocar a div inteira pelo iframe do player quando o vídeo estiver pronto -->
+      <!-- preload="none": o mp4 só começa a baixar no clique, então o
+           peso do vídeo não entra no carregamento da hero. Os controles
+           nativos aparecem junto com o play (ver main.js). -->
       <div class="vsl reveal">
         <div class="vsl__frame">
-          <button class="vsl__play" type="button" aria-label="Assistir ao vídeo do evento">
+          <video class="vsl__video" id="vsl-video"
+                 poster="assets/img/vsl-poster.webp"
+                 preload="none" playsinline
+                 width="1280" height="720">
+            <source src="assets/video/hero-vsl.mp4" type="video/mp4">
+            <p class="vsl__fallback">
+              Seu navegador não reproduz este vídeo.
+              <a href="assets/video/hero-vsl.mp4">Baixe o arquivo</a> para assistir.
+            </p>
+          </video>
+
+          <button class="vsl__play" type="button" data-tocar-vsl
+                  aria-label="Assistir ao vídeo do evento">
             <span class="vsl__play-icon" aria-hidden="true"></span>
           </button>
-          <p class="vsl__hint">Espaço reservado para o vídeo</p>
         </div>
       </div>
 
@@ -530,10 +547,10 @@
 
     <!-- ============================================================
          DOBRA 6 — depoimentos em vídeo, fita única
-         Oito clipes numa fita que sangra dos dois lados: o corte na
-         borda é o que diz que tem mais. Os pôsteres são espaço
-         reservado — ao receber os vídeos, trocar .depo__poster pelo
-         player (ou por <img> de capa + modal) mantendo a proporção 9:16.
+         Cinco clipes numa fita que sangra dos dois lados: o corte na
+         borda é o que diz que tem mais. Os vídeos são verticais e ficam
+         no YouTube; o card carrega só a capa, e o iframe entra no clique
+         (ver fachada dos depoimentos em main.js).
          O carrossel reaproveita o mesmo JS da dobra 5.
          ============================================================ -->
     <section class="depos" id="dobra-6">
@@ -542,11 +559,11 @@
         <p class="depos__eyebrow">Depoimentos</p>
         <h2 class="depos__title">
           Todos aqui travavam como você.
-          <span class="depos__title-em">Nenhum fala hoje como falava na sexta.</span>
+          <span class="depos__title-em">Nenhum fala hoje como falava na chegada.</span>
         </h2>
         <p class="depos__lead">
-          Cada uma chegou com uma trava diferente e terminou o domingo no
-          palco. Elas contam como foi.
+          Cada um chegou com uma trava diferente. Nestes vídeos, eles contam
+          o que mudou.
         </p>
       </div>
 
@@ -555,107 +572,71 @@
             role="group" aria-label="Depoimentos em vídeo, lista arrastável">
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="iTaWHYQysAk"
+                    aria-label="Assistir ao depoimento de Participante do Destrave">
+              <img class="depo__capa" src="assets/img/depo-1.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">01</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 01 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Participante do Destrave</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="KEMyKEvRkw4"
+                    aria-label="Assistir ao depoimento de Paulo Colombo, Ginecologista">
+              <img class="depo__capa" src="assets/img/depo-2.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">02</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 02 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Paulo Colombo</p>
+            <p class="depo__trava">Ginecologista</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="-adSMKjG6oc"
+                    aria-label="Assistir ao depoimento de Matheus, Arquiteto">
+              <img class="depo__capa" src="assets/img/depo-3.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">03</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 03 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Matheus</p>
+            <p class="depo__trava">Arquiteto</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="wob_LssQQ5o"
+                    aria-label="Assistir ao depoimento de Dra. Patrícia Sanches, Médica">
+              <img class="depo__capa" src="assets/img/depo-4.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">04</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 04 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Dra. Patrícia Sanches</p>
+            <p class="depo__trava">Médica</p>
           </li>
 
           <li class="depo">
-            <div class="depo__poster">
+            <button class="depo__poster" type="button" data-yt="MZHvsHiOvp0"
+                    aria-label="Assistir ao depoimento de Participante do Destrave">
+              <img class="depo__capa" src="assets/img/depo-5.webp" alt=""
+                   width="540" height="960" loading="lazy" decoding="async">
               <span class="depo__num" aria-hidden="true">05</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 05 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">06</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 06 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">07</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 07 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
-          </li>
-
-          <li class="depo">
-            <div class="depo__poster">
-              <span class="depo__num" aria-hidden="true">08</span>
-              <button class="depo__play" type="button"
-                      aria-label="Assistir ao depoimento 08 — vídeo ainda não publicado">
-                <span class="depo__play-icon" aria-hidden="true"></span>
-              </button>
-              <span class="depo__tempo" aria-hidden="true">0:00</span>
-            </div>
-            <p class="depo__nome">Nome do participante</p>
-            <p class="depo__trava">A trava dele, em uma linha</p>
+              <span class="depo__play" aria-hidden="true">
+                <span class="depo__play-icon"></span>
+              </span>
+            </button>
+            <p class="depo__nome">Participante do Destrave</p>
           </li>
 
         </ul>
@@ -672,19 +653,299 @@
         </div>
       </div>
 
-      <p class="depos__nota" data-reveal>Espaço reservado para os oito vídeos.</p>
     </section>
 
     <!-- ============================================================
-         PRÓXIMAS DOBRAS entram aqui
+         DOBRA 7 — a oferta: o que está incluído e o investimento
+         O valor fica borrado de propósito: quem quer o número preenche
+         o formulário. Trocar o preço em .preco__num e no data-valor.
          ============================================================ -->
-    <section id="formulario" class="placeholder-section">
-      <div class="container">
-        <p>Próxima etapa: formulário.</p>
+    <section class="oferta" id="formulario">
+
+      <div class="oferta__intro">
+        <p class="oferta__eyebrow" data-reveal>O investimento</p>
+        <h2 class="oferta__title" data-reveal>
+          Destrave Sua
+          <span class="oferta__title-em">Comunicação</span>
+        </h2>
+        <p class="oferta__meta" data-reveal>
+          <span class="oferta__meta-item">3 dias presenciais</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">20+ horas de imersão</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">4, 5 e 6 de setembro</span>
+          <span class="oferta__meta-dot" aria-hidden="true"></span>
+          <span class="oferta__meta-item">São Paulo, SP</span>
+        </p>
+      </div>
+
+      <div class="oferta__grid">
+
+        <!-- ----- Card 1: o que entra ----- -->
+        <div class="oferta__card oferta__incluso" data-reveal>
+          <h3 class="oferta__card-title">Tudo o que está incluído</h3>
+          <ul class="incluso__lista">
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>3 dias de imersão presencial (20+ horas)</b> com o método completo</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>O Tripé da Comunicação</b>: voz, corpo e mente, treinados na prática</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>3 gravações progressivas</b> (3, 5 e 7 min) mais autoavaliação guiada</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Hora do Show</b>: sua apresentação real de 10 min no palco</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Método P.A.M.</b> de posicionamento e autoridade</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Aulas com todos os especialistas</b>, mais Roberto Shinyashiki e Rogério Magalhães</span>
+          </li>
+          <li>
+            <svg class="incluso__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>
+            <span><b>Apostila, crachá e caneta</b>, coffee break nos 3 dias e certificado</span>
+          </li>
+          </ul>
+        </div>
+
+        <!-- ----- Card 2: o preço ----- -->
+        <div class="oferta__card oferta__preco" data-reveal>
+          <p class="preco__selo">Vagas limitadas</p>
+          <p class="preco__label">Investimento</p>
+
+          <p class="preco__valor">
+            <span class="preco__rs">R$</span>
+            <span class="preco__num" aria-hidden="true">3.997</span>
+            <span class="sr-only">Valor liberado no contato com a equipe.</span>
+          </p>
+
+          <p class="preco__nota">
+            O valor com desconto é liberado no contato com a nossa equipe.
+          </p>
+
+          <button class="btn btn--primary preco__cta" type="button" data-abrir-modal>
+            Liberar Desconto Agora
+          </button>
+
+          <p class="preco__rodape">
+            Você preenche, e a nossa equipe chama no WhatsApp para confirmar a vaga.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 8 — dúvidas frequentes
+         <details> puro: abre e fecha sem JS e o leitor de tela já
+         anuncia o estado sozinho.
+         ============================================================ -->
+    <section class="faq" id="duvidas">
+      <div class="faq__intro">
+        <p class="faq__eyebrow" data-reveal>Antes de decidir</p>
+        <h2 class="faq__title" data-reveal>
+          Dúvidas
+          <span class="faq__title-em">frequentes</span>
+        </h2>
+      </div>
+
+      <div class="faq__lista">
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>Terei certificado?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>Sim, é realizada a entrega do certificado online após o curso.</p></div>
+        </details>
+
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>Terei um kit do aluno?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>Sim. Apostila, crachá e caneta.</p></div>
+        </details>
+
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>Onde será o evento?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>O evento acontece em São Paulo, SP.</p></div>
+        </details>
+
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>Quais são os dias do evento?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>Dias 4, 5 e 6 de setembro de 2026, com mais de 20 horas de imersão ao longo dos três dias.</p></div>
+        </details>
+
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>A formação é presencial?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>Sim, os 3 dias são presenciais.</p></div>
+        </details>
+
+        <details class="faq__item" data-reveal>
+          <summary class="faq__pergunta">
+            <span>É oferecido coffee break?</span>
+            <svg class="faq__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <div class="faq__resposta"><p>Sim, o coffee break está incluso nos 3 dias do curso.</p></div>
+        </details>
       </div>
     </section>
 
   </main>
+
+  <!-- ============================================================
+       RODAPÉ
+       ============================================================ -->
+  <footer class="rodape">
+    <div class="rodape__inner">
+
+      <img class="rodape__logo" src="assets/img/logo-destrave.png"
+           alt="Destrave sua comunicação" width="636" height="223" loading="lazy">
+
+      <p class="rodape__evento">
+        3 dias presenciais em São Paulo, SP, nos dias 4, 5 e 6 de setembro de 2026.
+      </p>
+
+      <a class="rodape__wpp" data-whatsapp href="https://wa.me/5511917066626"
+         target="_blank" rel="noopener">
+        <svg class="rodape__wpp-icone" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2Zm5.8 14.13c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.23-3.3-.69-2.78-1.09-4.55-3.94-4.69-4.13-.14-.19-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.28.55-.34.73-.34h.52c.17 0 .4-.06.62.48.24.57.8 1.98.87 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.17-.3.37-.42.5-.14.14-.29.29-.12.57.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.45.12.62-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.95.92.28.14.47.21.54.33.07.12.07.68-.17 1.36Z"/>
+        </svg>
+        Falar com a nossa equipe
+      </a>
+
+      <p class="rodape__copy">
+        Copyright 2026 · RMA Educação<br>
+        Todos os direitos reservados
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MODAL DE CAPTAÇÃO
+       Abre em qualquer elemento com [data-abrir-modal]. O destino do
+       lead e o WhatsApp ficam no bloco CONFIG no topo de main.js.
+       ============================================================ -->
+  <div class="modal" id="modal-lead" hidden>
+    <div class="modal__fundo" data-fechar-modal></div>
+
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <button class="modal__fechar" type="button" data-fechar-modal aria-label="Fechar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <h2 class="modal__titulo" id="modal-titulo">Libere o seu desconto</h2>
+      <p class="modal__sub">
+        Preencha os seus dados. Nossa equipe entra em contato pelo WhatsApp para
+        confirmar a sua vaga e o valor com desconto.
+      </p>
+
+      <form class="lead" id="form-lead" novalidate>
+
+        <label class="lead__campo">
+          <span class="lead__label">Seu nome <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="text" name="nome" required
+                 autocomplete="name" placeholder="Como podemos te chamar">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Seu melhor e-mail <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="email" name="email" required
+                 autocomplete="email" placeholder="voce@email.com.br">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">WhatsApp <em aria-hidden="true">*</em></span>
+          <input class="lead__input" type="tel" name="whatsapp" required
+                 id="lead-whatsapp" autocomplete="tel" inputmode="tel"
+                 maxlength="16" placeholder="(11) 91234-5678">
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Qual sua renda média mensal? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="renda" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Até R$2.500</option>
+            <option>R$2.500 a R$5.000</option>
+            <option>R$5.000 a R$10.000</option>
+            <option>R$10.000 a R$15.000</option>
+            <option>R$15.000 a R$20.000</option>
+            <option>Acima de R$20.000</option>
+          </select>
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Qual seu cargo? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="cargo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>CEO / Fundador / Sócio</option>
+            <option>Diretor / C-Level (CFO, CMO, CTO, etc.)</option>
+            <option>Gerente / Head / Coordenador</option>
+            <option>Especialista / Analista</option>
+            <option>Assistente / Operacional</option>
+            <option>Autônomo / Profissional Liberal</option>
+            <option>Não trabalho</option>
+          </select>
+        </label>
+
+        <label class="lead__campo">
+          <span class="lead__label">Em que podemos te ajudar? <em aria-hidden="true">*</em></span>
+          <select class="lead__input lead__select" name="objetivo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Medo de falar em público</option>
+            <option>Insegurança diante de câmeras e redes sociais</option>
+            <option>Dificuldade em liderar conversas e apresentações</option>
+            <option>Problemas com timidez e presença pessoal</option>
+            <option>Quero desenvolver habilidades de comunicação para minha profissão</option>
+          </select>
+        </label>
+
+        <!-- Preenchidos pelo JS a partir da URL, para o lead chegar com origem -->
+        <input type="hidden" name="utm_source">
+        <input type="hidden" name="utm_medium">
+        <input type="hidden" name="utm_campaign">
+        <input type="hidden" name="utm_content">
+        <input type="hidden" name="utm_term">
+        <input type="hidden" name="referrer">
+
+        <p class="lead__erro" id="lead-erro" role="alert" hidden></p>
+
+        <button class="btn btn--primary lead__enviar" type="submit">
+          Enviar e liberar meu desconto
+        </button>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/js/main.js" defer></script>
 </body>
