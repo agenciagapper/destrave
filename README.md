@@ -153,7 +153,7 @@ WhatsApp (mesmo número e mesma mensagem do resto da página, montados pelo
 Aparece em dois lugares e os dois precisam ser alterados juntos:
 
 - `destrave/index.html`, atributo `data-deadline` do bloco `#countdown` (formato ISO com
-  fuso, ex. `2026-09-04T00:00:00-03:00`) — alimenta a contagem regressiva.
+  fuso, ex. `2027-04-16T00:00:00-03:00`) — alimenta a contagem regressiva.
 - `destrave/index.html`, parágrafo `.hero__when` — data e cidade exibidas na hero.
 - `destrave/index.html`, pílula `.oferta__meta` da dobra 7.
 - `destrave/index.html`, resposta da pergunta sobre os dias na
@@ -180,8 +180,8 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   falava na sexta* e afirmava que todos terminaram *o domingo no palco*.
   As duas frases foram trocadas quando a data da página ainda era 12, 13
   e 14 de setembro, que cai em sábado, domingo e segunda e derrubava as
-  duas. Com a data corrigida para 4, 5 e 6, que é sexta, sábado e
-  domingo, *na sexta* volta a ser verdade e pode ser restaurado no
+  duas. A data atual, 16, 17 e 18 de abril de 2027, também cai em sexta,
+  sábado e domingo, então *na sexta* é verdade e pode ser restaurado no
   título se preferirem a versão mais concreta. Está como *na chegada*,
   que não depende do dia da semana e sobrevive à próxima troca de data.
   Já a linha de apoio segue sem afirmar o palco, e isso não tem a ver com
@@ -197,7 +197,7 @@ Trechos que não vieram do cliente e ainda precisam do aval dele:
   término, dá pra devolver a pergunta ao formato original e completar a
   resposta.
 
-  Pela mesma razão, o `data-deadline` mira `00:00:00` do dia 4 e não uma
+  Pela mesma razão, o `data-deadline` mira `00:00:00` do dia 16 e não uma
   hora de abertura: a contagem regressiva conta até o dia do evento, sem
   cravar horário que ninguém confirmou.
 - **Dobra 7, condição de pagamento**: a referência que originou esta dobra
